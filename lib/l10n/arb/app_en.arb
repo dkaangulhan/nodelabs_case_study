@@ -1,7 +1,11 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "welcome": "Welcome",
+    "welcomeBody": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
+    "email":"E Mail",
+    "password": "Password",
+    "forgotPassword": "Forgot password",
+    "signIn": "Sign in",
+    "noAccount":"You don't have an account?",
+    "register": "Register"
 }
