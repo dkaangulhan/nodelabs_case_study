@@ -39,6 +39,18 @@ class NodelabsCaseStudyTheme {
           ),
           borderRadius: BorderRadius.circular(18),
         ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: _primaryColor.withValues(alpha: 0.2),
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: _primaryColor.withValues(alpha: 1),
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
         fillColor: _white.withValues(alpha: 0.1),
         filled: true,
       ),

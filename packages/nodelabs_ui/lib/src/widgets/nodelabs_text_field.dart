@@ -6,11 +6,16 @@ import 'package:nodelabs_ui/nodelabs_ui.dart';
 class NodelabsTextField extends StatefulWidget {
   /// Text input field for Nodelabs Case Study project.
   const NodelabsTextField({
+    this.controller,
     this.iconPath,
     this.label,
     this.isPassword = false,
+    this.validator,
     super.key,
   });
+
+  /// Controller for the field
+  final TextEditingController? controller;
 
   /// Icon of the text field.
   final String? iconPath;
@@ -20,6 +25,9 @@ class NodelabsTextField extends StatefulWidget {
 
   /// If true hide icon will be displayed to obscure button.
   final bool isPassword;
+
+  /// Validator of the field.
+  final String? Function(String?)? validator;
 
   @override
   State<NodelabsTextField> createState() => _NodelabsTextFieldState();
@@ -41,6 +49,8 @@ class _NodelabsTextFieldState extends State<NodelabsTextField> {
       listenable: _isObscured,
       builder: (context, _) {
         return TextFormField(
+          controller: widget.controller,
+          validator: widget.validator,
           decoration: InputDecoration(
             prefixIcon: Padding(
               padding: const EdgeInsets.only(left: 24, right: 10),

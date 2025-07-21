@@ -1,5 +1,4 @@
 {
-  "@@locale": "en",
   "welcome": "Welcome",
   "welcomeBody": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
   "email": "E Mail",
@@ -15,5 +14,19 @@
   "readAndAcceptTerms(rich)": "I did ${read} and ${acceptTerms} ${userTerms}",
   "read": "read",
   "accept": "accept",
-  "userTerms": "user terms"
+  "userTerms": "user terms",
+  "errors": {
+    "unknown": "Unknown error",
+    "invalidCredentials": "Invalid credentials"
+  },
+  "validators": {
+    "email": {
+      "empty": "Please enter your email",
+      "notValid": "Please enter a valid email address"
+    },
+    "password": {
+      "empty": "Please enter your password",
+      "length": "Password must be at least 8 characters long"
+    }
+  }
 }

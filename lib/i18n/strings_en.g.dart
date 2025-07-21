@@ -65,6 +65,52 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get read => 'read';
 	String get accept => 'accept';
 	String get userTerms => 'user terms';
+	late final TranslationsErrorsEn errors = TranslationsErrorsEn._(_root);
+	late final TranslationsValidatorsEn validators = TranslationsValidatorsEn._(_root);
+}
+
+// Path: errors
+class TranslationsErrorsEn {
+	TranslationsErrorsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get unknown => 'Unknown error';
+	String get invalidCredentials => 'Invalid credentials';
+}
+
+// Path: validators
+class TranslationsValidatorsEn {
+	TranslationsValidatorsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsValidatorsEmailEn email = TranslationsValidatorsEmailEn._(_root);
+	late final TranslationsValidatorsPasswordEn password = TranslationsValidatorsPasswordEn._(_root);
+}
+
+// Path: validators.email
+class TranslationsValidatorsEmailEn {
+	TranslationsValidatorsEmailEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Please enter your email';
+	String get notValid => 'Please enter a valid email address';
+}
+
+// Path: validators.password
+class TranslationsValidatorsPasswordEn {
+	TranslationsValidatorsPasswordEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Please enter your password';
+	String get length => 'Password must be at least 8 characters long';
 }
 
 /// Flat map(s) containing all translations.
@@ -98,6 +144,12 @@ extension on Translations {
 			case 'read': return 'read';
 			case 'accept': return 'accept';
 			case 'userTerms': return 'user terms';
+			case 'errors.unknown': return 'Unknown error';
+			case 'errors.invalidCredentials': return 'Invalid credentials';
+			case 'validators.email.empty': return 'Please enter your email';
+			case 'validators.email.notValid': return 'Please enter a valid email address';
+			case 'validators.password.empty': return 'Please enter your password';
+			case 'validators.password.length': return 'Password must be at least 8 characters long';
 			default: return null;
 		}
 	}
