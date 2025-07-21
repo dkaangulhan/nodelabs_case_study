@@ -23,6 +23,15 @@ RouteBase get $authScreenRouteData => StatefulShellRouteData.$route(
             ),
           ],
         ),
+        StatefulShellBranchData.$branch(
+          routes: [
+            GoRouteData.$route(
+              path: '/register',
+              name: 'register',
+              factory: _$RegisterPageRouteData._fromState,
+            ),
+          ],
+        ),
       ],
     );
 
@@ -38,6 +47,29 @@ mixin _$SignInPageRouteData on GoRouteData {
   @override
   String get location => GoRouteData.$location(
         '/sign-in',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$RegisterPageRouteData on GoRouteData {
+  static RegisterPageRouteData _fromState(GoRouterState state) =>
+      const RegisterPageRouteData();
+
+  @override
+  String get location => GoRouteData.$location(
+        '/register',
       );
 
   @override

@@ -17,6 +17,8 @@ dependencies:
   intl: ^0.19.0
   nodelabs_ui:
     path: packages/nodelabs_ui
+  slang: ^4.7.3
+  slang_flutter: ^4.7.0
 
 dev_dependencies:
   bloc_test: ^9.1.7
@@ -27,6 +29,7 @@ dev_dependencies:
     sdk: flutter
   go_router_builder: ^3.0.1
   mocktail: ^1.0.4
+  slang_build_runner: ^4.7.0
   very_good_analysis: ^6.0.0
 
 flutter:

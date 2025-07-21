@@ -12,6 +12,9 @@
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Add-User.svg
+  String get addUser => 'assets/icons/Add-User.svg';
+
   /// File path: assets/icons/Hide.svg
   String get hide => 'assets/icons/Hide.svg';
 
@@ -31,7 +34,8 @@ class $AssetsIconsGen {
   String get google => 'assets/icons/google.svg';
 
   /// List of all assets
-  List<String> get values => [hide, message, unlock, apple, facebook, google];
+  List<String> get values =>
+      [addUser, hide, message, unlock, apple, facebook, google];
 }
 
 class Assets {

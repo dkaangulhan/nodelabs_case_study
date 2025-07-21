@@ -5,8 +5,8 @@ import 'package:nodelabs_case_study/gen/assets.gen.dart';
 import 'package:nodelabs_case_study/i18n/strings.g.dart';
 import 'package:nodelabs_ui/nodelabs_ui.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SignInPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 40),
           children: [
             Text(
-              l10n.greetings,
+              l10n.welcome,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleSmall,
             ),
@@ -29,6 +29,13 @@ class SignInPage extends StatelessWidget {
             ),
             const SizedBox(
               height: 40,
+            ),
+            NodelabsTextField(
+              iconPath: Assets.icons.addUser,
+              label: Text(l10n.nameSurname),
+            ),
+            const SizedBox(
+              height: 14,
             ),
             NodelabsTextField(
               iconPath: Assets.icons.message,
@@ -43,23 +50,26 @@ class SignInPage extends StatelessWidget {
               isPassword: true,
             ),
             const SizedBox(
-              height: 30,
+              height: 14,
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Text(
-                l10n.forgotPassword,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      decoration: TextDecoration.underline,
-                    ),
-              ),
+            NodelabsTextField(
+              iconPath: Assets.icons.unlock,
+              label: Text(l10n.passwordRepeat),
+              isPassword: true,
             ),
             const SizedBox(
               height: 24,
             ),
+            _TermsText(
+              onTap: () {
+                const SignInPageRouteData().go(context);
+              },
+            ),
+            const SizedBox(
+              height: 36,
+            ),
             NodelabsPrimaryButton(
-              title: l10n.signIn,
+              title: l10n.register,
               onTap: () {},
             ),
             const SizedBox(
@@ -82,13 +92,9 @@ class SignInPage extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 32,
+              height: 36,
             ),
-            _NoAccountText(
-              onTap: () {
-                const RegisterPageRouteData().go(context);
-              },
-            ),
+            const _AlreadyHaveAccountText(),
           ],
         ),
       ),
@@ -96,8 +102,32 @@ class SignInPage extends StatelessWidget {
   }
 }
 
-class _NoAccountText extends StatelessWidget {
-  const _NoAccountText({
+class _AlreadyHaveAccountText extends StatelessWidget {
+  const _AlreadyHaveAccountText();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.t;
+    return RichText(
+      textAlign: TextAlign.center,
+      text: l10n.alreadyHaveAnAccount(
+        value: TextSpan(
+          text: l10n.signIn,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              const SignInPageRouteData().go(context);
+            },
+        ),
+      ),
+    );
+  }
+}
+
+class _TermsText extends StatelessWidget {
+  const _TermsText({
     required this.onTap,
   });
 
@@ -108,17 +138,25 @@ class _NoAccountText extends StatelessWidget {
     final l10n = context.t;
     return Center(
       child: RichText(
-        text: TextSpan(
-          text: l10n.noAccount,
-          children: [
-            TextSpan(
-              text: ' ${l10n.register}!',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-              recognizer: TapGestureRecognizer()..onTap = onTap,
+        text: l10n.readAndAcceptTerms(
+          read: TextSpan(
+            text: l10n.read,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
             ),
-          ],
+          ),
+          acceptTerms: TextSpan(
+            text: l10n.accept,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          userTerms: TextSpan(
+            text: l10n.userTerms,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

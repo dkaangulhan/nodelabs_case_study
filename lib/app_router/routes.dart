@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
 
 part 'routes.g.dart';
@@ -11,6 +12,14 @@ part 'routes.g.dart';
         TypedGoRoute<SignInPageRouteData>(
           name: 'sign-in',
           path: '/sign-in',
+        ),
+      ],
+    ),
+    TypedStatefulShellBranch<RegisterPageBranchData>(
+      routes: [
+        TypedGoRoute<RegisterPageRouteData>(
+          name: 'register',
+          path: '/register',
         ),
       ],
     ),
@@ -54,4 +63,18 @@ class SignInPageRouteData extends GoRouteData with _$SignInPageRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const SignInPage();
+}
+
+@immutable
+class RegisterPageBranchData extends StatefulShellBranchData {
+  const RegisterPageBranchData();
+}
+
+@immutable
+class RegisterPageRouteData extends GoRouteData with _$RegisterPageRouteData {
+  const RegisterPageRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const RegisterPage();
 }

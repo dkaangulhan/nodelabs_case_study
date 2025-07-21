@@ -30,8 +30,12 @@ class _NodelabsTextFieldState extends State<NodelabsTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final icon =
-        widget.iconPath != null ? SvgIcon(iconPath: widget.iconPath!) : null;
+    final icon = widget.iconPath != null
+        ? SvgIcon(
+            iconPath: widget.iconPath!,
+            color: Theme.of(context).colorScheme.onSurface,
+          )
+        : null;
 
     return ListenableBuilder(
       listenable: _isObscured,

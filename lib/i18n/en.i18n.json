@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "welcome": "Welcome",
+  "welcomeBody": "Tempus varius a vitae interdum id\ntortor elementum tristique eleifend at.",
+  "email": "E Mail",
+  "password": "Password",
+  "passwordRepeat": "Password again",
+  "forgotPassword": "Forgot password",
+  "signIn": "Sign in",
+  "noAccount": "You don't have an account?",
+  "register": "Register",
+  "greetings": "Hello",
+  "nameSurname": "Name Surname",
+  "alreadyHaveAnAccount(rich)": "Already have an account? ${value}",
+  "readAndAcceptTerms(rich)": "I did ${read} and ${acceptTerms} ${userTerms}",
+  "read": "read",
+  "accept": "accept",
+  "userTerms": "user terms"
+}
