@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nodelabs_case_study/auth/view/view.dart';
 import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
 
@@ -42,13 +43,7 @@ class AuthScreenRouteData extends StatefulShellRouteData {
     StatefulNavigationShell navigationShell,
     List<Widget> children,
   ) {
-    return Scaffold(
-      body: Builder(
-        builder: (context) {
-          return children[navigationShell.currentIndex];
-        },
-      ),
-    );
+    return AuthScreen(navigationShell: navigationShell, children: children);
   }
 }
 
