@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nodelabs_case_study/auth/view/view.dart';
+import 'package:nodelabs_case_study/initialize/view/initialize_screen.dart';
 import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
 
 part 'routes.g.dart';
+
+@TypedGoRoute<InitializeScreenRouteData>(
+  name: 'initialize',
+  path: '/initialize',
+)
+class InitializeScreenRouteData extends GoRouteData
+    with _$InitializeScreenRouteData {
+  const InitializeScreenRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const InitializeScreen();
+}
 
 @TypedStatefulShellRoute<AuthScreenRouteData>(
   branches: [

@@ -23,7 +23,7 @@ class AppRouter {
   ) {
     return GoRouter(
       navigatorKey: navigatorKey,
-      initialLocation: const SignInPageRouteData().location,
+      initialLocation: const InitializeScreenRouteData().location,
       debugLogDiagnostics: debugLogDiagnostics,
       routes: $appRoutes,
     );

@@ -7,8 +7,38 @@ part of 'routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
+      $initializeScreenRouteData,
       $authScreenRouteData,
     ];
+
+RouteBase get $initializeScreenRouteData => GoRouteData.$route(
+      path: '/initialize',
+      name: 'initialize',
+      factory: _$InitializeScreenRouteData._fromState,
+    );
+
+mixin _$InitializeScreenRouteData on GoRouteData {
+  static InitializeScreenRouteData _fromState(GoRouterState state) =>
+      const InitializeScreenRouteData();
+
+  @override
+  String get location => GoRouteData.$location(
+        '/initialize',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
 
 RouteBase get $authScreenRouteData => StatefulShellRouteData.$route(
       navigatorContainerBuilder: AuthScreenRouteData.$navigatorContainerBuilder,

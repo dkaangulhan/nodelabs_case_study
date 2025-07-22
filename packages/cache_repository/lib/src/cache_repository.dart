@@ -1,29 +1,55 @@
 import 'package:cache_repository/cache_repository.dart';
+import 'package:hive_client/hive_client.dart';
 
 /// {@template cache_repository}
 /// Repository to manage cache data.
 /// {@endtemplate}
 class CacheRepository {
   /// {@macro cache_repository}
-  const CacheRepository();
+  CacheRepository({HiveClient? hiveClient})
+      : _hiveClient = hiveClient ?? const HiveClient();
 
+  final HiveClient _hiveClient;
+
+  /// This will initialize cache.
   Future<void> initializeCache({
     required List<CacheBox> boxes,
-  }) async {}
+  }) async {
+    await _hiveClient.initialize(
+      boxes: boxes.map((element) {
+        return element.boxName;
+      }).toList(),
+    );
+  }
 
-  Future<void> setData({
+  /// This will put the value.
+  Future<void> put({
     required CacheValue value,
-  }) async {}
+  }) async {
+    await _hiveClient.put(
+      box: value.box.boxName,
+      key: value.key,
+      value: value.value,
+    );
+  }
 
-  Future<String> getData({
+  /// Gets the value, if exists, using the [key] and
+  /// [box]
+  Future<String?> getData({
+    required CacheBox box,
+    required String key,
+  }) async {
+    return _hiveClient.get(
+      box: box.boxName,
+      key: key,
+    );
+  }
+
+  /// The will clear the value of [key] in [box].
+  Future<void> clearData({
     required CacheBox box,
     required String key,
   }) async {
     throw UnimplementedError();
   }
-
-  Future<void> clearData({
-    required CacheBox box,
-    required String key,
-  }) async {}
 }
