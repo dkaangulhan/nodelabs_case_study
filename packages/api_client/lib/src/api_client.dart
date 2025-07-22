@@ -44,7 +44,7 @@ class ApiClient {
         ),
       );
       return LoginResponse.fromJson(
-        response.data!.data!,
+        response.data!.data! as Map<String, dynamic>,
       );
     } on DioException catch (e) {
       final error = e.error;
@@ -73,7 +73,7 @@ class ApiClient {
         ),
       );
       return RegisterResponse.fromJson(
-        response.data!.data!,
+        response.data!.data! as Map<String, dynamic>,
       );
     } on DioException catch (e) {
       final error = e.error;
@@ -98,8 +98,30 @@ class ApiClient {
         queryParameters: {'page': page},
       );
       return ApiMovieListResponse.fromJson(
-        response.data!.data!,
+        response.data!.data! as Map<String, dynamic>,
       );
+    } on DioException catch (e) {
+      final error = e.error;
+      if (error is ApiResponseException) {
+        throw error;
+      }
+      rethrow;
+    }
+  }
+
+  /// Get favorite movies.
+  Future<List<Movie>> getFavoriteMovies() async {
+    try {
+      final headers = await _prepareHeaders({});
+      final response = await _dio.get<ApiResponse>(
+        ApiEndPoints.favorites,
+        options: Options(
+          headers: headers,
+        ),
+      );
+      return (response.data!.data! as List<dynamic>).map((element) {
+        return Movie.fromJson(element as Map<String, dynamic>);
+      }).toList();
     } on DioException catch (e) {
       final error = e.error;
       if (error is ApiResponseException) {

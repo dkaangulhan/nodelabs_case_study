@@ -19,6 +19,7 @@
   "home": "Home",
   "profile": "Profile",
   "addPhoto": "Add Photo",
+  "favoriteMovies": "Favorite Movies",
   "errors": {
     "unknown": "Unknown error",
     "invalidCredentials": "Invalid credentials",

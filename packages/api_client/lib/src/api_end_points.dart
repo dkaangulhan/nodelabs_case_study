@@ -10,4 +10,5 @@ abstract class ApiEndPoints {
 
   /// movies
   static const String list = '$_baseUrl/movie/list';
+  static const String favorites = '$_baseUrl/movie/favorites';
 }

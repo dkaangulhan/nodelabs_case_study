@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ApiResponse {
   ResponseMeta get response;
-  Map<String, dynamic>? get data;
+  dynamic get data;
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -54,7 +54,7 @@ abstract mixin class $ApiResponseCopyWith<$Res> {
           ApiResponse value, $Res Function(ApiResponse) _then) =
       _$ApiResponseCopyWithImpl;
   @useResult
-  $Res call({ResponseMeta response, Map<String, dynamic>? data});
+  $Res call({ResponseMeta response, dynamic data});
 
   $ResponseMetaCopyWith<$Res> get response;
 }
@@ -82,7 +82,7 @@ class _$ApiResponseCopyWithImpl<$Res> implements $ApiResponseCopyWith<$Res> {
       data: freezed == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as dynamic,
     ));
   }
 
@@ -190,8 +190,7 @@ extension ApiResponsePatterns on ApiResponse {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(ResponseMeta response, Map<String, dynamic>? data)?
-        $default, {
+    TResult Function(ResponseMeta response, dynamic data)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -218,8 +217,7 @@ extension ApiResponsePatterns on ApiResponse {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(ResponseMeta response, Map<String, dynamic>? data)
-        $default,
+    TResult Function(ResponseMeta response, dynamic data) $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -244,8 +242,7 @@ extension ApiResponsePatterns on ApiResponse {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(ResponseMeta response, Map<String, dynamic>? data)?
-        $default,
+    TResult? Function(ResponseMeta response, dynamic data)? $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -260,23 +257,14 @@ extension ApiResponsePatterns on ApiResponse {
 /// @nodoc
 @JsonSerializable()
 class _ApiResponse implements ApiResponse {
-  const _ApiResponse(
-      {required this.response, required final Map<String, dynamic>? data})
-      : _data = data;
+  const _ApiResponse({required this.response, required this.data});
   factory _ApiResponse.fromJson(Map<String, dynamic> json) =>
       _$ApiResponseFromJson(json);
 
   @override
   final ResponseMeta response;
-  final Map<String, dynamic>? _data;
   @override
-  Map<String, dynamic>? get data {
-    final value = _data;
-    if (value == null) return null;
-    if (_data is EqualUnmodifiableMapView) return _data;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
+  final dynamic data;
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -300,13 +288,13 @@ class _ApiResponse implements ApiResponse {
             other is _ApiResponse &&
             (identical(other.response, response) ||
                 other.response == response) &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, response, const DeepCollectionEquality().hash(_data));
+      runtimeType, response, const DeepCollectionEquality().hash(data));
 
   @override
   String toString() {
@@ -322,7 +310,7 @@ abstract mixin class _$ApiResponseCopyWith<$Res>
       __$ApiResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({ResponseMeta response, Map<String, dynamic>? data});
+  $Res call({ResponseMeta response, dynamic data});
 
   @override
   $ResponseMetaCopyWith<$Res> get response;
@@ -349,9 +337,9 @@ class __$ApiResponseCopyWithImpl<$Res> implements _$ApiResponseCopyWith<$Res> {
           : response // ignore: cast_nullable_to_non_nullable
               as ResponseMeta,
       data: freezed == data
-          ? _self._data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as dynamic,
     ));
   }
 

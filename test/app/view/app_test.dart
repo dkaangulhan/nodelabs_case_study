@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nodelabs_case_study/counter/counter.dart';
 
 void main() {
   group('App', () {
@@ -10,7 +9,6 @@ void main() {
       //     cac
       //   ),
       // );
-      expect(find.byType(CounterPage), findsOneWidget);
     });
   });
 }

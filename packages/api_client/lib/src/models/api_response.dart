@@ -10,7 +10,7 @@ abstract class ApiResponse with _$ApiResponse {
   /// Api response data structure.
   const factory ApiResponse({
     required ResponseMeta response,
-    required Map<String, dynamic>? data,
+    required dynamic data,
   }) = _ApiResponse;
 
   /// Create [ApiResponse] from json.

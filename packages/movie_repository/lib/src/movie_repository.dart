@@ -5,9 +5,13 @@ import 'package:api_client/api_client.dart';
 /// {@endtemplate}
 class MovieRepository {
   /// {@macro movie_repository}
-  const MovieRepository(this._apiClient);
+  MovieRepository(this._apiClient);
 
   final ApiClient _apiClient;
+
+  /// User's favorite movies.
+  List<Movie> get favoriteMovies => _favoriteMovies;
+  final List<Movie> _favoriteMovies = [];
 
   /// To list the movies.
   Future<
@@ -29,5 +33,13 @@ class MovieRepository {
       currentPage: response.pagination.currentPage,
     );
     return (movies, pagination);
+  }
+
+  /// Get user's favorite movies.
+  Future<void> getFavoriteMovies() async {
+    final response = await _apiClient.getFavoriteMovies();
+    _favoriteMovies
+      ..clear()
+      ..addAll(response);
   }
 }

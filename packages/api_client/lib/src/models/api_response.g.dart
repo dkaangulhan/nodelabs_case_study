@@ -8,7 +8,7 @@ part of 'api_response.dart';
 
 _ApiResponse _$ApiResponseFromJson(Map<String, dynamic> json) => _ApiResponse(
       response: ResponseMeta.fromJson(json['response'] as Map<String, dynamic>),
-      data: json['data'] as Map<String, dynamic>?,
+      data: json['data'],
     );
 
 Map<String, dynamic> _$ApiResponseToJson(_ApiResponse instance) =>
