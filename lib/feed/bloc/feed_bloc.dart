@@ -19,16 +19,18 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           ),
         ) {
     on<RequestNextPage>(_onRequestMovies);
+    on<RefreshMovies>(_onRefreshMovies);
   }
 
   final MovieRepository _movieRepository;
+
+  bool get reachedMaxPage =>
+      state.maxPage != null && state.maxPage == state.currentPage;
 
   FutureOr<void> _onRequestMovies(
     RequestNextPage event,
     Emitter<FeedState> emit,
   ) async {
-    final reachedMaxPage =
-        state.maxPage != null && state.maxPage == state.currentPage;
     if (state is FeedLoading || reachedMaxPage) {
       return;
     }
@@ -46,6 +48,36 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     final result = await _movieRepository.listMovies(
       page: loadingPage,
     );
+    final movies = [...state.movies, ...result.$1];
+    emit(
+      FeedState(
+        movies: movies,
+        currentPage: loadingPage,
+        totalCount: result.$2.totalCount,
+        maxPage: result.$2.maxPage,
+      ),
+    );
+  }
+
+  FutureOr<void> _onRefreshMovies(
+    RefreshMovies event,
+    Emitter<FeedState> emit,
+  ) async {
+    if (state is FeedLoading) {
+      return;
+    }
+    const currentPage = 0;
+    const loadingPage = currentPage + 1;
+    emit(
+      const FeedLoading(
+        loadingPage: loadingPage,
+        currentPage: currentPage,
+        movies: [],
+        totalCount: null,
+        maxPage: null,
+      ),
+    );
+    final result = await _movieRepository.listMovies();
     final movies = [...state.movies, ...result.$1];
     emit(
       FeedState(

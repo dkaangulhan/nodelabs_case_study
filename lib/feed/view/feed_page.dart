@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -66,16 +68,28 @@ class _FeedPageContentState extends State<FeedPageContent> {
         builder: (context, state) {
           return Stack(
             children: [
-              Positioned.fill(
-                child: PageView.builder(
-                  key: _pageKey,
-                  controller: _pageController,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemCount: state.movies.length,
-                  itemBuilder: (context, index) {
-                    return MoviePoster(movie: state.movies[index]);
-                  },
+              RefreshIndicator.adaptive(
+                onRefresh: () async {
+                  context.read<FeedBloc>().add(const RefreshMovies());
+                  unawaited(
+                    _pageController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInCubic,
+                    ),
+                  );
+                },
+                child: Positioned.fill(
+                  child: PageView.builder(
+                    key: _pageKey,
+                    controller: _pageController,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: state.movies.length,
+                    itemBuilder: (context, index) {
+                      return MoviePoster(movie: state.movies[index]);
+                    },
+                  ),
                 ),
               ),
               if (state is FeedLoading)
