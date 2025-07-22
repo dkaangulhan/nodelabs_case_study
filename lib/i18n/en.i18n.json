@@ -15,10 +15,12 @@
   "read": "read",
   "accept": "accept",
   "userTerms": "user terms",
+  "showMore": "Show more",
   "errors": {
     "unknown": "Unknown error",
     "invalidCredentials": "Invalid credentials",
-    "userExists": "User exists"
+    "userExists": "User exists",
+    "imageCouldntload": "Image couldn't loaded"
   },
   "validators": {
     "email": {

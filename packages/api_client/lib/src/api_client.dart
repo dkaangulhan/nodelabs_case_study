@@ -1,10 +1,6 @@
 import 'dart:convert';
 
-import 'package:api_client/src/api_end_points.dart';
-import 'package:api_client/src/models/api_response.dart';
-import 'package:api_client/src/models/api_response_exception.dart';
-import 'package:api_client/src/models/login_response.dart';
-import 'package:api_client/src/models/register_response.dart';
+import 'package:api_client/api_client.dart';
 import 'package:dio/dio.dart';
 
 /// {@template api_client}
@@ -18,6 +14,19 @@ class ApiClient {
   }
 
   late final Dio _dio;
+
+  /// Set this with function that returns auth token.
+  Future<String?> Function()? getAuthToken;
+
+  Future<Map<String, dynamic>> _prepareHeaders(
+    Map<String, dynamic> headers,
+  ) async {
+    final token = await getAuthToken?.call();
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+    return headers;
+  }
 
   /// Login operation.
   Future<LoginResponse> login({
@@ -74,6 +83,31 @@ class ApiClient {
       rethrow;
     }
   }
+
+  /// List movies.
+  Future<ApiMovieListResponse> listMovies({
+    int page = 1,
+  }) async {
+    try {
+      final headers = await _prepareHeaders({});
+      final response = await _dio.get<ApiResponse>(
+        ApiEndPoints.list,
+        options: Options(
+          headers: headers,
+        ),
+        queryParameters: {'page': page},
+      );
+      return ApiMovieListResponse.fromJson(
+        response.data!.data!,
+      );
+    } on DioException catch (e) {
+      final error = e.error;
+      if (error is ApiResponseException) {
+        throw error;
+      }
+      rethrow;
+    }
+  }
 }
 
 class _ApiDioInterceptor implements Interceptor {
@@ -101,7 +135,7 @@ class _ApiDioInterceptor implements Interceptor {
     Response<dynamic> response,
     ResponseInterceptorHandler handler,
   ) {
-    handler.resolve(
+    handler.next(
       Response(
         requestOptions: response.requestOptions,
         data: ApiResponse.fromJson(

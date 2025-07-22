@@ -6,7 +6,9 @@ import 'package:auth_repository/src/models/models.dart';
 /// {@endtemplate}
 class AuthRepository {
   /// {@macro auth_repository}
-  AuthRepository(this._apiClient);
+  AuthRepository(this._apiClient) {
+    _apiClient.getAuthToken = _getAuthToken;
+  }
   final ApiClient _apiClient;
 
   /// Currently logged in user. If null
@@ -61,4 +63,6 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  Future<String?> _getAuthToken() async => _token;
 }

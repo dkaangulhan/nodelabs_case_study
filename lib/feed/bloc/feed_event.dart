@@ -6,3 +6,9 @@ sealed class FeedEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class RequestNextPage extends FeedEvent {
+  const RequestNextPage();
+  @override
+  List<Object> get props => [];
+}

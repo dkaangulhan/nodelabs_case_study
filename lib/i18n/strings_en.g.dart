@@ -65,6 +65,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get read => 'read';
 	String get accept => 'accept';
 	String get userTerms => 'user terms';
+	String get showMore => 'Show more';
 	late final TranslationsErrorsEn errors = TranslationsErrorsEn._(_root);
 	late final TranslationsValidatorsEn validators = TranslationsValidatorsEn._(_root);
 }
@@ -79,6 +80,7 @@ class TranslationsErrorsEn {
 	String get unknown => 'Unknown error';
 	String get invalidCredentials => 'Invalid credentials';
 	String get userExists => 'User exists';
+	String get imageCouldntload => 'Image couldn\'t loaded';
 }
 
 // Path: validators
@@ -159,9 +161,11 @@ extension on Translations {
 			case 'read': return 'read';
 			case 'accept': return 'accept';
 			case 'userTerms': return 'user terms';
+			case 'showMore': return 'Show more';
 			case 'errors.unknown': return 'Unknown error';
 			case 'errors.invalidCredentials': return 'Invalid credentials';
 			case 'errors.userExists': return 'User exists';
+			case 'errors.imageCouldntload': return 'Image couldn\'t loaded';
 			case 'validators.email.empty': return 'Please enter your email';
 			case 'validators.email.notValid': return 'Please enter a valid email address';
 			case 'validators.password.empty': return 'Please enter your password';
