@@ -17,7 +17,8 @@
   "userTerms": "user terms",
   "errors": {
     "unknown": "Unknown error",
-    "invalidCredentials": "Invalid credentials"
+    "invalidCredentials": "Invalid credentials",
+    "userExists": "User exists"
   },
   "validators": {
     "email": {
@@ -26,7 +27,13 @@
     },
     "password": {
       "empty": "Please enter your password",
-      "length": "Password must be at least 8 characters long"
+      "length": "Password must be at least 8 characters long",
+      "reEnterPassword": "Please re-enter your password",
+      "passwordDontMatch": "Passwords do not match"
+    },
+    "nameSurname": {
+      "empty": "Please enter your name and surname",
+      "nameAndSurname": "Please enter both name and surname"
     }
   }
 }

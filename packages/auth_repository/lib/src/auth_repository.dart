@@ -39,4 +39,26 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  /// Register with provided [email], [password] and [name].
+  Future<RegisterResponse> register({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
+    try {
+      final registerResponse = await _apiClient.register(
+        email: email,
+        password: password,
+        name: name,
+      );
+      _token = registerResponse.token;
+      return registerResponse;
+    } on ApiResponseException catch (e) {
+      if (e.response.message == ApiErrors.userExists) {
+        throw UserExists();
+      }
+      rethrow;
+    }
+  }
 }

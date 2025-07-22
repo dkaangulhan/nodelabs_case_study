@@ -32,4 +32,36 @@ abstract class Validators {
 
     return null;
   }
+
+  static String? passwordAgainValidator({
+    required BuildContext context,
+    required String password,
+    String? value,
+  }) {
+    if (value == null || value.trim().isEmpty) {
+      return context.t.validators.password.reEnterPassword;
+    }
+
+    if (value != password) {
+      return context.t.validators.password.passwordDontMatch;
+    }
+
+    return null;
+  }
+
+  static String? nameSurnameValidator({
+    required BuildContext context,
+    String? value,
+  }) {
+    if (value == null || value.trim().isEmpty) {
+      return context.t.validators.nameSurname.empty;
+    }
+
+    final parts = value.trim().split(' ');
+    if (parts.length < 2) {
+      return context.t.validators.nameSurname.nameAndSurname;
+    }
+
+    return null;
+  }
 }

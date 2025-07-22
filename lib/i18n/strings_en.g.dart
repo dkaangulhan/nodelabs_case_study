@@ -78,6 +78,7 @@ class TranslationsErrorsEn {
 	// Translations
 	String get unknown => 'Unknown error';
 	String get invalidCredentials => 'Invalid credentials';
+	String get userExists => 'User exists';
 }
 
 // Path: validators
@@ -89,6 +90,7 @@ class TranslationsValidatorsEn {
 	// Translations
 	late final TranslationsValidatorsEmailEn email = TranslationsValidatorsEmailEn._(_root);
 	late final TranslationsValidatorsPasswordEn password = TranslationsValidatorsPasswordEn._(_root);
+	late final TranslationsValidatorsNameSurnameEn nameSurname = TranslationsValidatorsNameSurnameEn._(_root);
 }
 
 // Path: validators.email
@@ -111,6 +113,19 @@ class TranslationsValidatorsPasswordEn {
 	// Translations
 	String get empty => 'Please enter your password';
 	String get length => 'Password must be at least 8 characters long';
+	String get reEnterPassword => 'Please re-enter your password';
+	String get passwordDontMatch => 'Passwords do not match';
+}
+
+// Path: validators.nameSurname
+class TranslationsValidatorsNameSurnameEn {
+	TranslationsValidatorsNameSurnameEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Please enter your name and surname';
+	String get nameAndSurname => 'Please enter both name and surname';
 }
 
 /// Flat map(s) containing all translations.
@@ -146,10 +161,15 @@ extension on Translations {
 			case 'userTerms': return 'user terms';
 			case 'errors.unknown': return 'Unknown error';
 			case 'errors.invalidCredentials': return 'Invalid credentials';
+			case 'errors.userExists': return 'User exists';
 			case 'validators.email.empty': return 'Please enter your email';
 			case 'validators.email.notValid': return 'Please enter a valid email address';
 			case 'validators.password.empty': return 'Please enter your password';
 			case 'validators.password.length': return 'Password must be at least 8 characters long';
+			case 'validators.password.reEnterPassword': return 'Please re-enter your password';
+			case 'validators.password.passwordDontMatch': return 'Passwords do not match';
+			case 'validators.nameSurname.empty': return 'Please enter your name and surname';
+			case 'validators.nameSurname.nameAndSurname': return 'Please enter both name and surname';
 			default: return null;
 		}
 	}

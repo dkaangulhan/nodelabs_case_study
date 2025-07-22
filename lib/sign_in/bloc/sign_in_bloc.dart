@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cache_repository/cache_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:nodelabs_case_study/app/state/app_state.dart';
 import 'package:nodelabs_case_study/config/app_cache_value.dart';
 
 part 'sign_in_event.dart';
@@ -49,5 +50,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         value: token,
       ),
     );
+    appState.value = appState.value.copyWith(isLoggedIn: true);
   }
 }

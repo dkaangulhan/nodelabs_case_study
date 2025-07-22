@@ -4,4 +4,5 @@
 /// can be returned from api.
 abstract class ApiErrors {
   static const String invalidCredentials = 'INVALID_CREDENTIALS';
+  static const String userExists = 'USER_EXISTS';
 }

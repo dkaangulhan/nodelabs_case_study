@@ -4,6 +4,7 @@ import 'package:api_client/src/api_end_points.dart';
 import 'package:api_client/src/models/api_response.dart';
 import 'package:api_client/src/models/api_response_exception.dart';
 import 'package:api_client/src/models/login_response.dart';
+import 'package:api_client/src/models/register_response.dart';
 import 'package:dio/dio.dart';
 
 /// {@template api_client}
@@ -34,6 +35,35 @@ class ApiClient {
         ),
       );
       return LoginResponse.fromJson(
+        response.data!.data!,
+      );
+    } on DioException catch (e) {
+      final error = e.error;
+      if (error is ApiResponseException) {
+        throw error;
+      }
+      rethrow;
+    }
+  }
+
+  /// Login operation.
+  Future<RegisterResponse> register({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
+    try {
+      final response = await _dio.post<ApiResponse>(
+        ApiEndPoints.register,
+        data: jsonEncode(
+          {
+            'email': email,
+            'name': name,
+            'password': password,
+          },
+        ),
+      );
+      return RegisterResponse.fromJson(
         response.data!.data!,
       );
     } on DioException catch (e) {
