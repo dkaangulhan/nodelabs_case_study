@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:nodelabs_case_study/i18n/strings.g.dart';
+import 'package:nodelabs_ui/nodelabs_ui.dart';
 
 class MoviePoster extends StatefulWidget {
   const MoviePoster({
@@ -21,6 +22,8 @@ class _MoviePosterState extends State<MoviePoster> {
     return Stack(
       children: [
         Positioned.fill(
+          bottom: NodelabsCaseStudyTheme.homeScreenPadding(context).bottom +
+              NodelabsCaseStudyTheme.homeScreenBottomNavbarHeight,
           child: CachedNetworkImage(
             imageUrl: widget.movie.poster!,
             fit: BoxFit.cover,
@@ -32,31 +35,34 @@ class _MoviePosterState extends State<MoviePoster> {
             },
           ),
         ),
-        Stack(
-          children: [
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: 200,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                      Colors.black.withValues(alpha: 1),
-                      Colors.black.withValues(alpha: 0.1),
-                    ],
+        Positioned.fill(
+          bottom: NodelabsCaseStudyTheme.homeScreenPadding(context).bottom +
+              NodelabsCaseStudyTheme.homeScreenBottomNavbarHeight,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: 200,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: 1),
+                        Colors.black.withValues(alpha: 0.1),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              left: 32,
-              right: 32,
-              bottom: 0,
-              child: SafeArea(
+              // Movie info
+              Positioned(
+                left: 32,
+                right: 32,
+                bottom: 16,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -84,8 +90,8 @@ class _MoviePosterState extends State<MoviePoster> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

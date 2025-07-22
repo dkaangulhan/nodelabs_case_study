@@ -68,6 +68,7 @@ class _FeedPageContentState extends State<FeedPageContent> {
         builder: (context, state) {
           return Stack(
             children: [
+              // Page View
               RefreshIndicator.adaptive(
                 onRefresh: () async {
                   context.read<FeedBloc>().add(const RefreshMovies());
@@ -82,6 +83,7 @@ class _FeedPageContentState extends State<FeedPageContent> {
                 child: Positioned.fill(
                   child: PageView.builder(
                     key: _pageKey,
+                    clipBehavior: Clip.none,
                     controller: _pageController,
                     physics: const AlwaysScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,

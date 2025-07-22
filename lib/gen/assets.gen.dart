@@ -33,9 +33,15 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.svg
   String get google => 'assets/icons/google.svg';
 
+  /// File path: assets/icons/home.svg
+  String get home => 'assets/icons/home.svg';
+
+  /// File path: assets/icons/profile.svg
+  String get profile => 'assets/icons/profile.svg';
+
   /// List of all assets
   List<String> get values =>
-      [addUser, hide, message, unlock, apple, facebook, google];
+      [addUser, hide, message, unlock, apple, facebook, google, home, profile];
 }
 
 class Assets {

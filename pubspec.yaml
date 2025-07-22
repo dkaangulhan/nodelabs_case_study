@@ -47,3 +47,10 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+
+flutter_gen:
+  output: lib/gen/ # Or your preferred output folder
+  assets:
+    enabled: true
+    outputs:
+      class_name: Assets

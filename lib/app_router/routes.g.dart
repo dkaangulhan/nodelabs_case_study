@@ -9,7 +9,7 @@ part of 'routes.dart';
 List<RouteBase> get $appRoutes => [
       $initializeScreenRouteData,
       $authScreenRouteData,
-      $feedScreenRouteData,
+      $homeScreenRouteData,
     ];
 
 RouteBase get $initializeScreenRouteData => GoRouteData.$route(
@@ -117,19 +117,66 @@ mixin _$RegisterPageRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $feedScreenRouteData => GoRouteData.$route(
-      path: '/feed',
-      name: 'feed',
-      factory: _$FeedScreenRouteData._fromState,
+RouteBase get $homeScreenRouteData => StatefulShellRouteData.$route(
+      navigatorContainerBuilder: HomeScreenRouteData.$navigatorContainerBuilder,
+      factory: $HomeScreenRouteDataExtension._fromState,
+      branches: [
+        StatefulShellBranchData.$branch(
+          routes: [
+            GoRouteData.$route(
+              path: '/feed',
+              name: 'feed',
+              factory: _$FeedPageRouteData._fromState,
+            ),
+          ],
+        ),
+        StatefulShellBranchData.$branch(
+          routes: [
+            GoRouteData.$route(
+              path: '/profile',
+              name: 'profile',
+              factory: _$ProfilePageRouteData._fromState,
+            ),
+          ],
+        ),
+      ],
     );
 
-mixin _$FeedScreenRouteData on GoRouteData {
-  static FeedScreenRouteData _fromState(GoRouterState state) =>
-      const FeedScreenRouteData();
+extension $HomeScreenRouteDataExtension on HomeScreenRouteData {
+  static HomeScreenRouteData _fromState(GoRouterState state) =>
+      const HomeScreenRouteData();
+}
+
+mixin _$FeedPageRouteData on GoRouteData {
+  static FeedPageRouteData _fromState(GoRouterState state) =>
+      const FeedPageRouteData();
 
   @override
   String get location => GoRouteData.$location(
         '/feed',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$ProfilePageRouteData on GoRouteData {
+  static ProfilePageRouteData _fromState(GoRouterState state) =>
+      const ProfilePageRouteData();
+
+  @override
+  String get location => GoRouteData.$location(
+        '/profile',
       );
 
   @override

@@ -16,6 +16,8 @@
   "accept": "accept",
   "userTerms": "user terms",
   "showMore": "Show more",
+  "home": "Home",
+  "profile": "Profile",
   "errors": {
     "unknown": "Unknown error",
     "invalidCredentials": "Invalid credentials",

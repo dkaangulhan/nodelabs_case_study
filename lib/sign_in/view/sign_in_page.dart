@@ -22,7 +22,7 @@ class _SignInPageState extends State<SignInPage> with SignInPageMixin {
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) {
         if (state is SignInCompleted) {
-          const FeedScreenRouteData().go(context);
+          const FeedPageRouteData().go(context);
         }
       },
       child: Scaffold(

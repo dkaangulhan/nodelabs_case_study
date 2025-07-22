@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:nodelabs_case_study/app/state/app_state.dart';
 import 'package:nodelabs_case_study/auth/view/view.dart';
 import 'package:nodelabs_case_study/feed/view/feed_page.dart';
+import 'package:nodelabs_case_study/home/view/home_screen.dart';
 import 'package:nodelabs_case_study/initialize/view/initialize_screen.dart';
+import 'package:nodelabs_case_study/profile/view/profile_page.dart';
 import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
 
@@ -51,7 +53,7 @@ class AuthScreenRouteData extends StatefulShellRouteData {
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
     if (appState.value.isLoggedIn) {
-      return const FeedScreenRouteData().location;
+      return const FeedPageRouteData().location;
     }
     return null;
   }
@@ -100,13 +102,81 @@ class RegisterPageRouteData extends GoRouteData with _$RegisterPageRouteData {
       const RegisterPage();
 }
 
-@TypedGoRoute<FeedScreenRouteData>(
-  name: 'feed',
-  path: '/feed',
+@TypedStatefulShellRoute<HomeScreenRouteData>(
+  branches: [
+    TypedStatefulShellBranch<FeedPageBranchData>(
+      routes: [
+        TypedGoRoute<FeedPageRouteData>(
+          name: 'feed',
+          path: '/feed',
+        ),
+      ],
+    ),
+    TypedStatefulShellBranch<ProfilePageBranchData>(
+      routes: [
+        TypedGoRoute<ProfilePageRouteData>(
+          name: 'profile',
+          path: '/profile',
+        ),
+      ],
+    ),
+  ],
 )
-class FeedScreenRouteData extends GoRouteData with _$FeedScreenRouteData {
-  const FeedScreenRouteData();
+@immutable
+class HomeScreenRouteData extends StatefulShellRouteData {
+  const HomeScreenRouteData();
+
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    if (!appState.value.isLoggedIn) {
+      return const SignInPageRouteData().location;
+    }
+    return null;
+  }
+
+  @override
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) =>
+      navigationShell;
+
+  static Widget $navigatorContainerBuilder(
+    BuildContext context,
+    StatefulNavigationShell navigationShell,
+    List<Widget> children,
+  ) {
+    return HomeScreen(
+      navigationShell: navigationShell,
+      children: children,
+    );
+  }
+}
+
+@immutable
+class FeedPageBranchData extends StatefulShellBranchData {
+  const FeedPageBranchData();
+}
+
+@immutable
+class FeedPageRouteData extends GoRouteData with _$FeedPageRouteData {
+  const FeedPageRouteData();
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const FeedPage();
+}
+
+@immutable
+class ProfilePageBranchData extends StatefulShellBranchData {
+  const ProfilePageBranchData();
+}
+
+@immutable
+class ProfilePageRouteData extends GoRouteData with _$ProfilePageRouteData {
+  const ProfilePageRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ProfilePage();
 }

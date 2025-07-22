@@ -12,6 +12,14 @@ class NodelabsCaseStudyTheme {
   static const _black = Color(0xFF090909);
   static const _white = Color(0xFFFFFFFF);
 
+  /// This is padding applied to home screen.
+  static EdgeInsets homeScreenPadding(BuildContext context) {
+    return MediaQuery.of(context).viewPadding;
+  }
+
+  /// Height for the bottom nav bar of home screen.
+  static double get homeScreenBottomNavbarHeight => 50;
+
   /// [ThemeData] for the Nodelabs case study.
   ThemeData get themeData {
     return ThemeData(
