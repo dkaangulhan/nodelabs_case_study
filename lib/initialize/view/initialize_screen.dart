@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nodelabs_case_study/app_router/routes.dart';
 import 'package:nodelabs_case_study/initialize/bloc/initialize_bloc.dart';
+import 'package:user_repository/user_repository.dart';
 
 class InitializeScreen extends StatelessWidget {
   const InitializeScreen({super.key});
@@ -16,6 +17,7 @@ class InitializeScreen extends StatelessWidget {
         return InitializeBloc(
           cacheRepository: context.read<CacheRepository>(),
           authRepository: context.read<AuthRepository>(),
+          userRepository: context.read<UserRepository>(),
         )..add(InitializeApp());
       },
       child: const _Loading(),

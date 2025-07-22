@@ -28,6 +28,8 @@ dependencies:
     path: packages/nodelabs_ui
   slang: ^4.7.3
   slang_flutter: ^4.7.0
+  user_repository:
+    path: packages/user_repository
 
 dev_dependencies:
   bloc_test: ^9.1.7

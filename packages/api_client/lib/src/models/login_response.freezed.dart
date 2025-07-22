@@ -14,6 +14,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$LoginResponse {
+  String get id;
   String get name;
   String get email;
   String get token;
@@ -35,6 +36,7 @@ mixin _$LoginResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is LoginResponse &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.token, token) || other.token == token) &&
@@ -44,11 +46,12 @@ mixin _$LoginResponse {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, token, photoUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, email, token, photoUrl);
 
   @override
   String toString() {
-    return 'LoginResponse(name: $name, email: $email, token: $token, photoUrl: $photoUrl)';
+    return 'LoginResponse(id: $id, name: $name, email: $email, token: $token, photoUrl: $photoUrl)';
   }
 }
 
@@ -58,7 +61,8 @@ abstract mixin class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) _then) =
       _$LoginResponseCopyWithImpl;
   @useResult
-  $Res call({String name, String email, String token, String? photoUrl});
+  $Res call(
+      {String id, String name, String email, String token, String? photoUrl});
 }
 
 /// @nodoc
@@ -74,12 +78,17 @@ class _$LoginResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? token = null,
     Object? photoUrl = freezed,
   }) {
     return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -193,14 +202,16 @@ extension LoginResponsePatterns on LoginResponse {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String name, String email, String token, String? photoUrl)?
+    TResult Function(String id, String name, String email, String token,
+            String? photoUrl)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _LoginResponse() when $default != null:
-        return $default(_that.name, _that.email, _that.token, _that.photoUrl);
+        return $default(
+            _that.id, _that.name, _that.email, _that.token, _that.photoUrl);
       case _:
         return orElse();
     }
@@ -221,13 +232,15 @@ extension LoginResponsePatterns on LoginResponse {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String name, String email, String token, String? photoUrl)
+    TResult Function(String id, String name, String email, String token,
+            String? photoUrl)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _LoginResponse():
-        return $default(_that.name, _that.email, _that.token, _that.photoUrl);
+        return $default(
+            _that.id, _that.name, _that.email, _that.token, _that.photoUrl);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -247,14 +260,15 @@ extension LoginResponsePatterns on LoginResponse {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String name, String email, String token, String? photoUrl)?
+    TResult? Function(String id, String name, String email, String token,
+            String? photoUrl)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _LoginResponse() when $default != null:
-        return $default(_that.name, _that.email, _that.token, _that.photoUrl);
+        return $default(
+            _that.id, _that.name, _that.email, _that.token, _that.photoUrl);
       case _:
         return null;
     }
@@ -265,13 +279,16 @@ extension LoginResponsePatterns on LoginResponse {
 @JsonSerializable()
 class _LoginResponse implements LoginResponse {
   const _LoginResponse(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.email,
       required this.token,
       required this.photoUrl});
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
 
+  @override
+  final String id;
   @override
   final String name;
   @override
@@ -301,6 +318,7 @@ class _LoginResponse implements LoginResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoginResponse &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.token, token) || other.token == token) &&
@@ -310,11 +328,12 @@ class _LoginResponse implements LoginResponse {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, token, photoUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, email, token, photoUrl);
 
   @override
   String toString() {
-    return 'LoginResponse(name: $name, email: $email, token: $token, photoUrl: $photoUrl)';
+    return 'LoginResponse(id: $id, name: $name, email: $email, token: $token, photoUrl: $photoUrl)';
   }
 }
 
@@ -326,7 +345,8 @@ abstract mixin class _$LoginResponseCopyWith<$Res>
       __$LoginResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, String email, String token, String? photoUrl});
+  $Res call(
+      {String id, String name, String email, String token, String? photoUrl});
 }
 
 /// @nodoc
@@ -342,12 +362,17 @@ class __$LoginResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? token = null,
     Object? photoUrl = freezed,
   }) {
     return _then(_LoginResponse(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable

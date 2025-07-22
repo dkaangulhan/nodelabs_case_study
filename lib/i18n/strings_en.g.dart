@@ -68,6 +68,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get showMore => 'Show more';
 	String get home => 'Home';
 	String get profile => 'Profile';
+	String get addPhoto => 'Add Photo';
 	late final TranslationsErrorsEn errors = TranslationsErrorsEn._(_root);
 	late final TranslationsValidatorsEn validators = TranslationsValidatorsEn._(_root);
 }
@@ -166,6 +167,7 @@ extension on Translations {
 			case 'showMore': return 'Show more';
 			case 'home': return 'Home';
 			case 'profile': return 'Profile';
+			case 'addPhoto': return 'Add Photo';
 			case 'errors.unknown': return 'Unknown error';
 			case 'errors.invalidCredentials': return 'Invalid credentials';
 			case 'errors.userExists': return 'User exists';

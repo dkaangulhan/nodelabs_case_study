@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cache_repository/cache_repository.dart';
@@ -6,6 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nodelabs_case_study/app/state/app_state.dart';
 import 'package:nodelabs_case_study/config/app_cache_value.dart';
+import 'package:user_repository/user_repository.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -14,14 +16,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc({
     required AuthRepository authRepository,
     required CacheRepository cacheRepository,
+    required UserRepository userRepository,
   })  : _authRepository = authRepository,
         _cacheRepository = cacheRepository,
+        _userRepository = userRepository,
         super(RegisterInitial()) {
     on<RegisterRequest>(_onRegisterRequest);
   }
 
   final AuthRepository _authRepository;
   final CacheRepository _cacheRepository;
+  final UserRepository _userRepository;
 
   FutureOr<void> _onRegisterRequest(
     RegisterRequest event,
@@ -35,6 +40,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         name: event.name,
       );
       await _putTokenCache(registerResponse.token);
+      await _putUser(registerResponse);
       emit(RegisterCompleted());
     } on AuthException catch (e) {
       if (e is UserExists) {
@@ -52,5 +58,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       ),
     );
     appState.value = appState.value.copyWith(isLoggedIn: true);
+  }
+
+  Future<void> _putUser(RegisterResponse registerResponse) async {
+    final user = User(
+      id: registerResponse.id,
+      name: registerResponse.name,
+      email: registerResponse.email,
+      photoUrl: registerResponse.photoUrl,
+    );
+    _userRepository.user = user;
+    await _cacheRepository.put(
+      value: UserCache(value: jsonEncode(user.toJson())),
+    );
   }
 }

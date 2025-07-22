@@ -27,6 +27,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/apple.svg
   String get apple => 'assets/icons/apple.svg';
 
+  /// File path: assets/icons/arrow-left.svg
+  String get arrowLeft => 'assets/icons/arrow-left.svg';
+
   /// File path: assets/icons/facebook.svg
   String get facebook => 'assets/icons/facebook.svg';
 
@@ -40,8 +43,18 @@ class $AssetsIconsGen {
   String get profile => 'assets/icons/profile.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [addUser, hide, message, unlock, apple, facebook, google, home, profile];
+  List<String> get values => [
+        addUser,
+        hide,
+        message,
+        unlock,
+        apple,
+        arrowLeft,
+        facebook,
+        google,
+        home,
+        profile
+      ];
 }
 
 class Assets {

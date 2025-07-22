@@ -18,6 +18,7 @@
   "showMore": "Show more",
   "home": "Home",
   "profile": "Profile",
+  "addPhoto": "Add Photo",
   "errors": {
     "unknown": "Unknown error",
     "invalidCredentials": "Invalid credentials",

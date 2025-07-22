@@ -16,3 +16,15 @@ class JwtCache extends AppCacheValue {
   @override
   List<Object?> get props => [key, value, box];
 }
+
+class UserCache extends AppCacheValue {
+  const UserCache({required super.value}) : super(key: keyValue);
+
+  static const String keyValue = 'user';
+
+  @override
+  CacheBox get box => UserCacheBox();
+
+  @override
+  List<Object?> get props => [key, value, box];
+}

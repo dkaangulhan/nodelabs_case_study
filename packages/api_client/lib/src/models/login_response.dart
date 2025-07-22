@@ -8,6 +8,7 @@ part 'login_response.g.dart';
 abstract class LoginResponse with _$LoginResponse {
   /// Login response data coming from api.
   const factory LoginResponse({
+    required String id,
     required String name,
     required String email,
     required String token,

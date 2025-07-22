@@ -8,6 +8,7 @@ part 'register_response.g.dart';
 abstract class RegisterResponse with _$RegisterResponse {
   /// Response object for register.
   const factory RegisterResponse({
+    required String id,
     required String name,
     required String email,
     required String token,

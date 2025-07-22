@@ -90,6 +90,40 @@ class NodelabsCaseStudyTheme {
           ),
         ),
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+          ),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18 / 2),
+            ),
+          ),
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.disabled)) {
+                return _white.withValues(alpha: 0.5);
+              }
+              return _primaryColor;
+            },
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.disabled)) {
+                return _black.withValues(alpha: 0.5);
+              }
+              return _white;
+            },
+          ),
+        ),
+      ),
+      appBarTheme: AppBarTheme(
+        centerTitle: true,
+        titleTextStyle: NodelabsTextStyles.titleSmall.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
