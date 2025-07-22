@@ -9,6 +9,7 @@ part of 'routes.dart';
 List<RouteBase> get $appRoutes => [
       $initializeScreenRouteData,
       $authScreenRouteData,
+      $feedScreenRouteData,
     ];
 
 RouteBase get $initializeScreenRouteData => GoRouteData.$route(
@@ -100,6 +101,35 @@ mixin _$RegisterPageRouteData on GoRouteData {
   @override
   String get location => GoRouteData.$location(
         '/register',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $feedScreenRouteData => GoRouteData.$route(
+      path: '/feed',
+      name: 'feed',
+      factory: _$FeedScreenRouteData._fromState,
+    );
+
+mixin _$FeedScreenRouteData on GoRouteData {
+  static FeedScreenRouteData _fromState(GoRouterState state) =>
+      const FeedScreenRouteData();
+
+  @override
+  String get location => GoRouteData.$location(
+        '/feed',
       );
 
   @override

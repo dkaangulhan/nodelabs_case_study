@@ -9,4 +9,13 @@ sealed class InitializeState extends Equatable {
 
 final class InitializeInitial extends InitializeState {}
 
-final class Success extends InitializeState {}
+final class Success extends InitializeState {
+  const Success({
+    required this.isAuthenticated,
+  });
+
+  final bool isAuthenticated;
+
+  @override
+  List<Object> get props => [isAuthenticated];
+}

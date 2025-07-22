@@ -14,6 +14,12 @@ class AuthRepository {
   String? get token => _token;
   String? _token;
 
+  /// Updates token
+  // ignore: use_setters_to_change_properties
+  void putToken(String? token) {
+    _token = token;
+  }
+
   /// Logs user in with provided [email] and [password].
   Future<LoginResponse> login({
     required String email,

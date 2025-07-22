@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:cache_repository/cache_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class InitializeScreen extends StatelessWidget {
       create: (context) {
         return InitializeBloc(
           cacheRepository: context.read<CacheRepository>(),
+          authRepository: context.read<AuthRepository>(),
         )..add(InitializeApp());
       },
       child: const _Loading(),
@@ -26,21 +28,22 @@ class _Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<InitializeBloc, InitializeState>(
+    return BlocListener<InitializeBloc, InitializeState>(
       listener: (context, state) {
-        if (state is Success) {
-          const SignInPageRouteData().go(context);
+        switch (state) {
+          case InitializeInitial():
+            return;
+          case Success():
+            const SignInPageRouteData().go(context);
         }
       },
-      builder: (context, state) {
-        return const Scaffold(
-          body: Center(
-            child: CupertinoActivityIndicator(
-              color: Colors.white,
-            ),
+      child: const Scaffold(
+        body: Center(
+          child: CupertinoActivityIndicator(
+            color: Colors.white,
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

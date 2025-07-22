@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nodelabs_case_study/app/state/app_state.dart';
 import 'package:nodelabs_case_study/auth/view/view.dart';
+import 'package:nodelabs_case_study/feed/view/feed_page.dart';
 import 'package:nodelabs_case_study/initialize/view/initialize_screen.dart';
 import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
@@ -45,6 +49,14 @@ class AuthScreenRouteData extends StatefulShellRouteData {
   const AuthScreenRouteData();
 
   @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    if (appState.value.isLoggedIn) {
+      return const FeedScreenRouteData().location;
+    }
+    return null;
+  }
+
+  @override
   Widget builder(
     BuildContext context,
     GoRouterState state,
@@ -86,4 +98,15 @@ class RegisterPageRouteData extends GoRouteData with _$RegisterPageRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const RegisterPage();
+}
+
+@TypedGoRoute<FeedScreenRouteData>(
+  name: 'feed',
+  path: '/feed',
+)
+class FeedScreenRouteData extends GoRouteData with _$FeedScreenRouteData {
+  const FeedScreenRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const FeedPage();
 }

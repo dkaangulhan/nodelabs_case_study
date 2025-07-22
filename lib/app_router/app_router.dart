@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nodelabs_case_study/app/state/app_state.dart';
 import 'package:nodelabs_case_study/app_router/routes.dart';
 
 class AppRouter {
@@ -25,6 +26,7 @@ class AppRouter {
       navigatorKey: navigatorKey,
       initialLocation: const InitializeScreenRouteData().location,
       debugLogDiagnostics: debugLogDiagnostics,
+      refreshListenable: appState,
       routes: $appRoutes,
     );
   }

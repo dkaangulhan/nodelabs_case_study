@@ -19,109 +19,116 @@ class _SignInPageState extends State<SignInPage> with SignInPageMixin {
   @override
   Widget build(BuildContext context) {
     final l10n = context.t;
-    return Scaffold(
-      body: SafeArea(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Form(
-            key: formKey,
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              children: [
-                Text(
-                  l10n.greetings,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                Text(
-                  l10n.welcomeBody,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                BlocBuilder<SignInBloc, SignInState>(
-                  builder: (context, state) {
-                    if (state is! SignInError) {
-                      return const SizedBox();
-                    }
-                    return _ErrorBox(
-                      error: state,
-                    );
-                  },
-                ),
-                NodelabsTextField(
-                  controller: emailController,
-                  iconPath: Assets.icons.message,
-                  validator: emailValidator,
-                  label: Text(l10n.email),
-                ),
-                const SizedBox(
-                  height: 14,
-                ),
-                NodelabsTextField(
-                  controller: passwordController,
-                  iconPath: Assets.icons.unlock,
-                  validator: passwordValidator,
-                  label: Text(l10n.password),
-                  isPassword: true,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    l10n.forgotPassword,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          decoration: TextDecoration.underline,
-                        ),
+    return BlocListener<SignInBloc, SignInState>(
+      listener: (context, state) {
+        if (state is SignInCompleted) {
+          const FeedScreenRouteData().go(context);
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Form(
+              key: formKey,
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                children: [
+                  Text(
+                    l10n.greetings,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                BlocBuilder<SignInBloc, SignInState>(
-                  builder: (context, state) {
-                    final bloc = context.read<SignInBloc>();
-                    final isLoading = bloc.state is SignInLoading;
-                    return NodelabsPrimaryButton(
-                      title: l10n.signIn,
-                      isLoading: isLoading,
-                      onTap: onSignIn,
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 36,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 8,
-                  children: [
-                    SocialMediaIcon(
-                      iconPath: Assets.icons.google,
-                      onTap: () {},
+                  Text(
+                    l10n.welcomeBody,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  BlocBuilder<SignInBloc, SignInState>(
+                    builder: (context, state) {
+                      if (state is! SignInError) {
+                        return const SizedBox();
+                      }
+                      return _ErrorBox(
+                        error: state,
+                      );
+                    },
+                  ),
+                  NodelabsTextField(
+                    controller: emailController,
+                    iconPath: Assets.icons.message,
+                    validator: emailValidator,
+                    label: Text(l10n.email),
+                  ),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                  NodelabsTextField(
+                    controller: passwordController,
+                    iconPath: Assets.icons.unlock,
+                    validator: passwordValidator,
+                    label: Text(l10n.password),
+                    isPassword: true,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      l10n.forgotPassword,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            decoration: TextDecoration.underline,
+                          ),
                     ),
-                    SocialMediaIcon(
-                      iconPath: Assets.icons.apple,
-                    ),
-                    SocialMediaIcon(
-                      iconPath: Assets.icons.facebook,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                _NoAccountText(
-                  onTap: () {
-                    const RegisterPageRouteData().go(context);
-                  },
-                ),
-              ],
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  BlocBuilder<SignInBloc, SignInState>(
+                    builder: (context, state) {
+                      final bloc = context.read<SignInBloc>();
+                      final isLoading = bloc.state is SignInLoading;
+                      return NodelabsPrimaryButton(
+                        title: l10n.signIn,
+                        isLoading: isLoading,
+                        onTap: onSignIn,
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 36,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      SocialMediaIcon(
+                        iconPath: Assets.icons.google,
+                        onTap: () {},
+                      ),
+                      SocialMediaIcon(
+                        iconPath: Assets.icons.apple,
+                      ),
+                      SocialMediaIcon(
+                        iconPath: Assets.icons.facebook,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  _NoAccountText(
+                    onTap: () {
+                      const RegisterPageRouteData().go(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:auth_repository/auth_repository.dart';
+import 'package:cache_repository/cache_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +24,7 @@ class AuthScreen extends StatelessWidget {
           create: (context) {
             return SignInBloc(
               authRepository: context.read<AuthRepository>(),
+              cacheRepository: context.read<CacheRepository>(),
             );
           },
         ),
