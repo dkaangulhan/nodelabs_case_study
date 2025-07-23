@@ -202,6 +202,8 @@ class _ApiDioInterceptor implements Interceptor {
         err.response!.data as Map<String, dynamic>,
       );
       throw apiResponseError;
+    } on ApiResponseException {
+      rethrow;
     } catch (e) {
       throw err;
     }
