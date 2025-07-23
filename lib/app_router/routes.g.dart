@@ -10,7 +10,6 @@ List<RouteBase> get $appRoutes => [
       $initializeScreenRouteData,
       $authScreenRouteData,
       $homeScreenRouteData,
-      $limitedOfferPageRouteData,
     ];
 
 RouteBase get $initializeScreenRouteData => GoRouteData.$route(
@@ -208,35 +207,6 @@ mixin _$UpdatePhotoRouteData on GoRouteData {
   @override
   String get location => GoRouteData.$location(
         '/profile/update-photo',
-      );
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $limitedOfferPageRouteData => GoRouteData.$route(
-      path: '/limited-offer',
-      name: 'limited-offer',
-      factory: _$LimitedOfferPageRouteData._fromState,
-    );
-
-mixin _$LimitedOfferPageRouteData on GoRouteData {
-  static LimitedOfferPageRouteData _fromState(GoRouterState state) =>
-      const LimitedOfferPageRouteData();
-
-  @override
-  String get location => GoRouteData.$location(
-        '/limited-offer',
       );
 
   @override

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nodelabs_case_study/gen/assets.gen.dart';
 import 'package:nodelabs_case_study/i18n/strings.g.dart';
 import 'package:nodelabs_ui/nodelabs_ui.dart';
@@ -9,7 +8,7 @@ import 'package:nodelabs_ui/nodelabs_ui.dart';
 part '_package.dart';
 part '_perk.dart';
 
-final _blur = ImageFilter.blur(sigmaX: 10, sigmaY: 10);
+final _blur = ImageFilter.blur(sigmaX: 6, sigmaY: 6);
 const _bottomSheetBorderRadius = Radius.circular(
   32,
 );
@@ -19,26 +18,25 @@ const _titleFontSize = 20.0;
 /// Limited offer dialog.
 class LimitedOffer extends StatelessWidget {
   /// Limited offer dialog.
-  const LimitedOffer({super.key});
+  const LimitedOffer._();
+
+  static Future<void> show({required BuildContext context}) {
+    return showModalBottomSheet(
+      context: context,
+      barrierColor: Colors.transparent,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return const LimitedOffer._();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        GoRouter.of(context).pop();
-      },
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          child: const SafeArea(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: _BottomSheet(),
-            ),
-          ),
-        ),
-      ),
+    return const SafeArea(
+      top: false,
+      child: _BottomSheet(),
     );
   }
 }
@@ -106,11 +104,12 @@ class _BottomSheet extends StatelessWidget {
             ),
             Padding(
               padding: _bottomSheetPadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: ListView(
+                shrinkWrap: true,
                 children: [
                   Text(
                     context.t.limitedOffer,
+                    textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: _titleFontSize,
                         ),

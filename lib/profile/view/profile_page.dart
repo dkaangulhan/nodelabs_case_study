@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:nodelabs_case_study/i18n/strings.g.dart';
+import 'package:nodelabs_case_study/limited_offer/view/limited_offer.dart';
 import 'package:nodelabs_case_study/profile/bloc/profile_bloc.dart';
 import 'package:nodelabs_case_study/user_card/view/user_card.dart';
+import 'package:nodelabs_ui/nodelabs_ui.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -35,6 +37,14 @@ class _Content extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 title: Text(context.t.profile),
+                actions: [
+                  NodelabsFilledButton(
+                    title: context.t.limitedOffer,
+                    onTap: () {
+                      LimitedOffer.show(context: context);
+                    },
+                  ),
+                ],
               ),
               const SliverToBoxAdapter(
                 child: SizedBox(
