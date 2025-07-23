@@ -84,10 +84,26 @@ class $AssetsIconsGen {
       ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/SinFlixLogo.png
+  AssetGenImage get sinFlixLogo =>
+      const AssetGenImage('assets/images/SinFlixLogo.png');
+
+  /// File path: assets/images/SinFlixSplash.png
+  AssetGenImage get sinFlixSplash =>
+      const AssetGenImage('assets/images/SinFlixSplash.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [sinFlixLogo, sinFlixSplash];
+}
+
 class Assets {
   const Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {

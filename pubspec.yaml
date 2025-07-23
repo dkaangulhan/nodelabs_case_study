@@ -40,6 +40,7 @@ dev_dependencies:
   build_runner: ^2.4.15
   build_verify: ^3.1.1
   flutter_gen_runner: ^5.7.0
+  flutter_native_splash: ^2.4.6
   flutter_test:
     sdk: flutter
   go_router_builder: ^3.0.1
@@ -53,6 +54,7 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/images/
 
 flutter_gen:
   output: lib/gen/ # Or your preferred output folder
@@ -60,3 +62,9 @@ flutter_gen:
     enabled: true
     outputs:
       class_name: Assets
+
+flutter_native_splash:
+  background_image: assets/images/SinFlixSplash.png
+  fullscreen: true
+  android: true
+  ios: true
