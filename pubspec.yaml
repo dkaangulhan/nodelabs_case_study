@@ -7,6 +7,8 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
+  analytics_repository:
+    path: packages/analytics_repository
   auth_repository:
     path: packages/auth_repository
   bloc: ^8.1.4

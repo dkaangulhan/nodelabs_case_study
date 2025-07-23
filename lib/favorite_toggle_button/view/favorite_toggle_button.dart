@@ -1,9 +1,11 @@
+import 'package:analytics_repository/analytics_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:nodelabs_case_study/favorite_toggle_button/cubit/favorite_toggle_button_cubit.dart';
 import 'package:nodelabs_case_study/gen/assets.gen.dart';
 import 'package:nodelabs_ui/nodelabs_ui.dart';
+import 'package:user_repository/user_repository.dart';
 
 class FavoriteToggleButton extends StatefulWidget {
   const FavoriteToggleButton({required this.movie, super.key});
@@ -22,6 +24,8 @@ class _FavoriteToggleButtonState extends State<FavoriteToggleButton> {
         return FavoriteToggleButtonCubit(
           movie: widget.movie,
           movieRepository: context.read<MovieRepository>(),
+          analyticsRepository: context.read<AnalyticsRepository>(),
+          userRepository: context.read<UserRepository>(),
         );
       },
       child: const _Content(),

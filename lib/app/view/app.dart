@@ -1,3 +1,4 @@
+import 'package:analytics_repository/analytics_repository.dart';
 import 'package:auth_repository/auth_repository.dart';
 import 'package:cache_repository/cache_repository.dart';
 import 'package:external_media_repository/external_media_repository.dart';
@@ -16,6 +17,7 @@ class App extends StatelessWidget {
     required MovieRepository movieRepository,
     required UserRepository userRepository,
     required ExternalMediaRepository externalMediaRepository,
+    required AnalyticsRepository analyticsRepository,
     required AppRouter appRouter,
     super.key,
   })  : _authRepository = authRepository,
@@ -23,6 +25,7 @@ class App extends StatelessWidget {
         _movieRepository = movieRepository,
         _userRepository = userRepository,
         _externalMediaRepository = externalMediaRepository,
+        _analyticsRepository = analyticsRepository,
         _appRouter = appRouter;
 
   final AuthRepository _authRepository;
@@ -30,6 +33,7 @@ class App extends StatelessWidget {
   final MovieRepository _movieRepository;
   final UserRepository _userRepository;
   final ExternalMediaRepository _externalMediaRepository;
+  final AnalyticsRepository _analyticsRepository;
   final AppRouter _appRouter;
 
   @override
@@ -50,6 +54,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider.value(
           value: _externalMediaRepository,
+        ),
+        RepositoryProvider.value(
+          value: _analyticsRepository,
         ),
       ],
       child: TranslationProvider(

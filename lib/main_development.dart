@@ -1,3 +1,4 @@
+import 'package:analytics_repository/analytics_repository.dart';
 import 'package:auth_repository/auth_repository.dart';
 import 'package:cache_repository/cache_repository.dart';
 import 'package:external_media_repository/external_media_repository.dart';
@@ -16,6 +17,7 @@ void main() {
   final movieRepository = MovieRepository(apiClient);
   final userRepository = UserRepository(apiClient);
   const externalMediaRepository = ExternalMediaRepository();
+  const analyticsRepository = AnalyticsRepository();
 
   bootstrap(
     () => App(
@@ -24,6 +26,7 @@ void main() {
       movieRepository: movieRepository,
       userRepository: userRepository,
       externalMediaRepository: externalMediaRepository,
+      analyticsRepository: analyticsRepository,
       appRouter: AppRouter(
         navigatorKey: appState.value.navigatorKey,
         debugLogDiagnostics: true,
