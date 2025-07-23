@@ -3,6 +3,7 @@ import 'package:cache_repository/cache_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_repository/movie_repository.dart';
 import 'package:nodelabs_case_study/app_router/routes.dart';
 import 'package:nodelabs_case_study/initialize/bloc/initialize_bloc.dart';
 import 'package:user_repository/user_repository.dart';
@@ -18,6 +19,7 @@ class InitializeScreen extends StatelessWidget {
           cacheRepository: context.read<CacheRepository>(),
           authRepository: context.read<AuthRepository>(),
           userRepository: context.read<UserRepository>(),
+          movieRepository: context.read<MovieRepository>(),
         )..add(InitializeApp());
       },
       child: const _Loading(),

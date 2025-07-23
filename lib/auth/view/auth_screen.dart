@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_repository/movie_repository.dart';
 import 'package:nodelabs_case_study/register/bloc/register_bloc.dart';
 import 'package:nodelabs_case_study/sign_in/bloc/sign_in_bloc.dart';
 import 'package:user_repository/user_repository.dart';
@@ -28,6 +29,7 @@ class AuthScreen extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
               cacheRepository: context.read<CacheRepository>(),
               userRepository: context.read<UserRepository>(),
+              movieRepository: context.read<MovieRepository>(),
             );
           },
         ),
