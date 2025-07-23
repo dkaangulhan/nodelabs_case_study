@@ -106,44 +106,8 @@ class _Content extends StatelessWidget {
                     ),
                     itemCount: state.favoriteMovies.length,
                     itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: CachedNetworkImage(
-                                imageUrl: state.favoriteMovies[index].poster!,
-                                fit: BoxFit.cover,
-                                errorListener: (value) {},
-                                errorWidget: (context, url, error) {
-                                  return ColoredBox(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface
-                                        .withValues(alpha: 0.1),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            state.favoriteMovies[index].title!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            state.favoriteMovies[index].type!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                      return _FavoriteMovieCard(
+                        movie: state.favoriteMovies[index],
                       );
                     },
                   ),
@@ -152,6 +116,58 @@ class _Content extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _FavoriteMovieCard extends StatelessWidget {
+  const _FavoriteMovieCard({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    final uri = Uri.parse(movie.poster!).replace(scheme: 'https');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: CachedNetworkImage(
+              imageUrl: uri.toString(),
+              fit: BoxFit.cover,
+              errorListener: (value) {},
+              errorWidget: (context, url, error) {
+                return ColoredBox(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.1),
+                );
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          movie.title!,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontWeight: FontWeight.w500),
+        ),
+        Text(
+          movie.type!,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

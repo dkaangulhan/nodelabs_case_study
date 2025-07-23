@@ -20,6 +20,7 @@ class MoviePoster extends StatefulWidget {
 class _MoviePosterState extends State<MoviePoster> {
   @override
   Widget build(BuildContext context) {
+    final uri = Uri.parse(widget.movie.poster!).replace(scheme: 'https');
     return Stack(
       children: [
         // Image
@@ -27,7 +28,7 @@ class _MoviePosterState extends State<MoviePoster> {
           bottom: NodelabsCaseStudyTheme.homeScreenPadding(context).bottom +
               NodelabsCaseStudyTheme.homeScreenBottomNavbarHeight,
           child: CachedNetworkImage(
-            imageUrl: widget.movie.poster!,
+            imageUrl: uri.toString(),
             fit: BoxFit.cover,
             errorListener: (value) {},
             errorWidget: (context, url, error) {
