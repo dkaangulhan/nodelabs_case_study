@@ -73,6 +73,40 @@ flutter run --flavor development --target lib/main_development.dart
 
 _Nodelabs Case Study works on iOS, Android, Web, and Windows._
 
+### Managing Dependencies and Cleaning Projects
+
+To recursively clean all Flutter projects and fetch dependencies (including all packages), use the provided scripts in the `script/` directory:
+
+#### Clean all Flutter projects/packages
+
+```sh
+bash script/flutter_clean.sh
+```
+
+#### Clean and fetch dependencies for all Flutter projects/packages
+
+```sh
+bash script/flutter_pub_get.sh
+```
+
+- By default, these scripts start from the project root and process every subdirectory containing a `pubspec.yaml` file.
+- You can also provide a custom base directory as an argument:
+
+```sh
+bash script/flutter_clean.sh path/to/dir
+bash script/flutter_pub_get.sh path/to/dir
+```
+
+> **Note:**
+> If you get a 'Permission denied' error when running the scripts, make sure they are executable:
+>
+> ```sh
+> chmod +x script/flutter_clean.sh
+> chmod +x script/flutter_pub_get.sh
+> ```
+>
+> You only need to do this once per script after cloning the repository.
+
 ---
 
 ## Architecture
