@@ -23,7 +23,7 @@
   "loadPhotos": "Load photos",
   "loadPhotosDescription": "Resources out incentivize relaxation floor loss cc.",
   "limitedOffer": "Limited Offer",
-  "limitedOfferDescription": "Jeton paketin’ni seçerek bonus kazanın ve yeni bölümlerin kilidini açın!",
+  "limitedOfferDescription": "Jeton paketin’ni seçerek bonus\nkazanın ve yeni bölümlerin kilidini açın!",
   "limitedOfferBonus": "Bonuses you will get",
   "continue": "Continue",
   "premiumAccount": "Premium Account",
@@ -32,6 +32,8 @@
   "moreLikes": "More Likes",
   "pickPackageToUnlock": "Pick a package to unlock",
   "seeAllTokens": "See all tokens",
+  "token": "Token",
+  "tokenPerWeek": "Tokens per week",
   "errors": {
     "unknown": "Unknown error",
     "invalidCredentials": "Invalid credentials",
