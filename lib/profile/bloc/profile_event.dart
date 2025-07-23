@@ -8,3 +8,12 @@ sealed class ProfileEvent extends Equatable {
 }
 
 class LoadFavoriteMovies extends ProfileEvent {}
+
+class FavoriteMoviesUpdated extends ProfileEvent {
+  const FavoriteMoviesUpdated(this.movies);
+
+  final List<Movie> movies;
+
+  @override
+  List<Object> get props => [movies];
+}

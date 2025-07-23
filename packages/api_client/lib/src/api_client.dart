@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:api_client/api_client.dart';
+import 'package:api_client/src/models/api_favorite_movie_response.dart';
 import 'package:dio/dio.dart';
 
 /// {@template api_client}
@@ -122,6 +123,31 @@ class ApiClient {
       return (response.data!.data! as List<dynamic>).map((element) {
         return Movie.fromJson(element as Map<String, dynamic>);
       }).toList();
+    } on DioException catch (e) {
+      final error = e.error;
+      if (error is ApiResponseException) {
+        throw error;
+      }
+      rethrow;
+    }
+  }
+
+  /// Toggle favorite movie.
+  Future<ApiFavoriteMovieResponse> favoriteMovie(
+    String id,
+  ) async {
+    try {
+      final headers = await _prepareHeaders({});
+
+      final response = await _dio.post<ApiResponse>(
+        '${ApiEndPoints.toggleFavorite}/$id',
+        options: Options(
+          headers: headers,
+        ),
+      );
+      return ApiFavoriteMovieResponse.fromJson(
+        response.data!.data as Map<String, dynamic>,
+      );
     } on DioException catch (e) {
       final error = e.error;
       if (error is ApiResponseException) {

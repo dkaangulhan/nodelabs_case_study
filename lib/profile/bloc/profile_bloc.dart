@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:movie_repository/movie_repository.dart';
 
 part 'profile_event.dart';
@@ -17,24 +18,53 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           ),
         ) {
     on<LoadFavoriteMovies>(_onLoadFavoriteMovies);
+    on<FavoriteMoviesUpdated>(_onFavoriteMoviesUpdated);
+    _streamSubscription = _movieRepository.favoriteMovieStream.listen(
+      _onFavoriteMovieEvent,
+    );
   }
   final MovieRepository _movieRepository;
+
+  late final StreamSubscription<FavoriteMovieEvent> _streamSubscription;
 
   FutureOr<void> _onLoadFavoriteMovies(
     LoadFavoriteMovies event,
     Emitter<ProfileState> emit,
   ) async {
     emit(
-      state.copyWith(
+      ProfileState(
+        favoriteMovies: List.from(_movieRepository.favoriteMovies),
         favoriteMoviesState: FavoriteMoviesState.loading,
       ),
     );
     await _movieRepository.getFavoriteMovies();
     emit(
-      state.copyWith(
-        favoriteMovies: _movieRepository.favoriteMovies,
+      ProfileState(
+        favoriteMovies: List.from(_movieRepository.favoriteMovies),
         favoriteMoviesState: FavoriteMoviesState.loaded,
       ),
     );
+  }
+
+  void _onFavoriteMoviesUpdated(
+    FavoriteMoviesUpdated event,
+    Emitter<ProfileState> emit,
+  ) {
+    emit(
+      ProfileState(
+        favoriteMovies: event.movies,
+        favoriteMoviesState: FavoriteMoviesState.loaded,
+      ),
+    );
+  }
+
+  void _onFavoriteMovieEvent(FavoriteMovieEvent event) {
+    add(FavoriteMoviesUpdated(List.from(_movieRepository.favoriteMovies)));
+  }
+
+  @override
+  Future<void> close() async {
+    await _streamSubscription.cancel();
+    return super.close();
   }
 }

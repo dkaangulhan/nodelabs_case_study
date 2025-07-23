@@ -11,11 +11,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<ProfileBloc>(
       create: (context) {
-        return ProfileBloc(
+        final bloc = ProfileBloc(
           movieRepository: context.read<MovieRepository>(),
         )..add(LoadFavoriteMovies());
+        return bloc;
       },
       child: const _Content(),
     );
@@ -95,7 +96,6 @@ class _Content extends StatelessWidget {
                     ),
                     itemCount: state.favoriteMovies.length,
                     itemBuilder: (context, index) {
-                      final movie = state.favoriteMovies[index];
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -107,8 +107,9 @@ class _Content extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: CachedNetworkImage(
-                                imageUrl: movie.poster!,
+                                imageUrl: state.favoriteMovies[index].poster!,
                                 fit: BoxFit.cover,
+                                errorListener: (value) {},
                                 errorWidget: (context, url, error) {
                                   return ColoredBox(
                                     color: Theme.of(context)
@@ -122,13 +123,13 @@ class _Content extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           Text(
-                            movie.title!,
+                            state.favoriteMovies[index].title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            movie.type!,
+                            state.favoriteMovies[index].type!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

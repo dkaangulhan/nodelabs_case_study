@@ -47,6 +47,10 @@ class _UserCardContent extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: user.photoUrl!,
                 fit: BoxFit.cover,
+                errorListener: (value) {},
+                errorWidget: (context, url, error) {
+                  return ColoredBox(color: Colors.white.withValues(alpha: 0.5));
+                },
               ),
             ),
             const SizedBox(width: 10),

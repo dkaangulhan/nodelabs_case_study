@@ -7,6 +7,7 @@ enum FavoriteMoviesState {
   error,
 }
 
+@immutable
 class ProfileState extends Equatable {
   const ProfileState({
     required this.favoriteMovies,
@@ -17,15 +18,5 @@ class ProfileState extends Equatable {
   final FavoriteMoviesState favoriteMoviesState;
 
   @override
-  List<Object> get props => [favoriteMovies, favoriteMovies];
-
-  ProfileState copyWith({
-    List<Movie>? favoriteMovies,
-    FavoriteMoviesState? favoriteMoviesState,
-  }) {
-    return ProfileState(
-      favoriteMovies: favoriteMovies ?? this.favoriteMovies,
-      favoriteMoviesState: favoriteMoviesState ?? this.favoriteMoviesState,
-    );
-  }
+  List<Object> get props => [favoriteMovies, favoriteMoviesState];
 }

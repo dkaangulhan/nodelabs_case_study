@@ -18,3 +18,9 @@ class RequestNextPage extends FeedEvent {
   @override
   List<Object> get props => [];
 }
+
+class FavoriteMoviesUpdated extends FeedEvent {
+  const FavoriteMoviesUpdated();
+  @override
+  List<Object> get props => [];
+}

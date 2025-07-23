@@ -1,3 +1,5 @@
+// ignore_for_file: use_if_null_to_convert_nulls_to_bools
+
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -20,9 +22,14 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         ) {
     on<RequestNextPage>(_onRequestMovies);
     on<RefreshMovies>(_onRefreshMovies);
+    on<FavoriteMoviesUpdated>(_updateFavoriteMovieState);
+    _favoriteMovieSubscription =
+        _movieRepository.favoriteMovieStream.listen(_onFavoriteMoviesUpdate);
   }
 
   final MovieRepository _movieRepository;
+
+  late final StreamSubscription<FavoriteMovieEvent> _favoriteMovieSubscription;
 
   bool get reachedMaxPage =>
       state.maxPage != null && state.maxPage == state.currentPage;
@@ -87,5 +94,35 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         maxPage: result.$2.maxPage,
       ),
     );
+  }
+
+  FutureOr<void> _updateFavoriteMovieState(
+    FavoriteMoviesUpdated event,
+    Emitter<FeedState> emit,
+  ) async {
+    final stateMovies = [...state.movies];
+    final favoriteMovies = [..._movieRepository.favoriteMovies];
+    for (var i = 0; i < stateMovies.length; i++) {
+      final movie = stateMovies[i];
+      final index = favoriteMovies.indexWhere(
+        (element) => movie.id == element.id,
+      );
+      if (index == -1) {
+        stateMovies[i] = movie.copyWith(isFavorite: false);
+        continue;
+      }
+      stateMovies[i] = movie.copyWith(isFavorite: true);
+    }
+    emit(state.copyWith(movies: stateMovies));
+  }
+
+  void _onFavoriteMoviesUpdate(FavoriteMovieEvent event) {
+    add(const FavoriteMoviesUpdated());
+  }
+
+  @override
+  Future<void> close() async {
+    await _favoriteMovieSubscription.cancel();
+    return super.close();
   }
 }

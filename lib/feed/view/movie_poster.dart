@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_repository/movie_repository.dart';
+import 'package:nodelabs_case_study/favorite_toggle_button/view/favorite_toggle_button.dart';
 import 'package:nodelabs_case_study/i18n/strings.g.dart';
 import 'package:nodelabs_ui/nodelabs_ui.dart';
 
@@ -21,12 +22,14 @@ class _MoviePosterState extends State<MoviePoster> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // Image
         Positioned.fill(
           bottom: NodelabsCaseStudyTheme.homeScreenPadding(context).bottom +
               NodelabsCaseStudyTheme.homeScreenBottomNavbarHeight,
           child: CachedNetworkImage(
             imageUrl: widget.movie.poster!,
             fit: BoxFit.cover,
+            errorListener: (value) {},
             errorWidget: (context, url, error) {
               return ColoredBox(
                 color: Theme.of(context).colorScheme.surface,
@@ -91,6 +94,14 @@ class _MoviePosterState extends State<MoviePoster> {
                 ),
               ),
             ],
+          ),
+        ),
+        // Favorite button
+        Positioned(
+          right: 16,
+          bottom: 250,
+          child: FavoriteToggleButton(
+            movie: widget.movie,
           ),
         ),
       ],

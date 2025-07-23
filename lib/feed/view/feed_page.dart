@@ -89,7 +89,9 @@ class _FeedPageContentState extends State<FeedPageContent> {
                     scrollDirection: Axis.vertical,
                     itemCount: state.movies.length,
                     itemBuilder: (context, index) {
-                      return MoviePoster(movie: state.movies[index]);
+                      return MoviePoster(
+                        movie: state.movies[index],
+                      );
                     },
                   ),
                 ),

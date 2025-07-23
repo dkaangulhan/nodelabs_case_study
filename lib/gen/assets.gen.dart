@@ -36,6 +36,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.svg
   String get google => 'assets/icons/google.svg';
 
+  /// File path: assets/icons/heart.svg
+  String get heart => 'assets/icons/heart.svg';
+
+  /// File path: assets/icons/heart_outline.svg
+  String get heartOutline => 'assets/icons/heart_outline.svg';
+
   /// File path: assets/icons/home.svg
   String get home => 'assets/icons/home.svg';
 
@@ -52,6 +58,8 @@ class $AssetsIconsGen {
         arrowLeft,
         facebook,
         google,
+        heart,
+        heartOutline,
         home,
         profile
       ];
