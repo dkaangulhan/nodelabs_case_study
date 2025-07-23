@@ -72,7 +72,16 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get favoriteMovies => 'Favorite Movies';
 	String get loadPhotos => 'Load photos';
 	String get loadPhotosDescription => 'Resources out incentivize relaxation floor loss cc.';
+	String get limitedOffer => 'Limited Offer';
+	String get limitedOfferDescription => 'Jeton paketin’ni seçerek bonus kazanın ve yeni bölümlerin kilidini açın!';
+	String get limitedOfferBonus => 'Bonuses you will get';
 	String get kContinue => 'Continue';
+	String get premiumAccount => 'Premium Account';
+	String get moreMatch => 'More Match';
+	String get morePromotions => 'More Promotions';
+	String get moreLikes => 'More Likes';
+	String get pickPackageToUnlock => 'Pick a package to unlock';
+	String get seeAllTokens => 'See all tokens';
 	late final TranslationsErrorsEn errors = TranslationsErrorsEn._(_root);
 	late final TranslationsValidatorsEn validators = TranslationsValidatorsEn._(_root);
 }
@@ -176,7 +185,16 @@ extension on Translations {
 			case 'favoriteMovies': return 'Favorite Movies';
 			case 'loadPhotos': return 'Load photos';
 			case 'loadPhotosDescription': return 'Resources out incentivize relaxation floor loss cc.';
+			case 'limitedOffer': return 'Limited Offer';
+			case 'limitedOfferDescription': return 'Jeton paketin’ni seçerek bonus kazanın ve yeni bölümlerin kilidini açın!';
+			case 'limitedOfferBonus': return 'Bonuses you will get';
 			case 'kContinue': return 'Continue';
+			case 'premiumAccount': return 'Premium Account';
+			case 'moreMatch': return 'More Match';
+			case 'morePromotions': return 'More Promotions';
+			case 'moreLikes': return 'More Likes';
+			case 'pickPackageToUnlock': return 'Pick a package to unlock';
+			case 'seeAllTokens': return 'See all tokens';
 			case 'errors.unknown': return 'Unknown error';
 			case 'errors.invalidCredentials': return 'Invalid credentials';
 			case 'errors.userExists': return 'User exists';

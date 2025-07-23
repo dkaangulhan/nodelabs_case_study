@@ -113,6 +113,17 @@ class _AnimatedBranchContainerState extends State<_AnimatedBranchContainer> {
               ),
             ),
           ),
+          Center(
+            child: SizedBox(
+              width: double.infinity,
+              child: NodelabsPrimaryButton(
+                onTap: () {
+                  const LimitedOfferPageRouteData().push<void>(context);
+                },
+                title: 'Limited Offer',
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -7,6 +7,7 @@ import 'package:nodelabs_case_study/auth/view/view.dart';
 import 'package:nodelabs_case_study/feed/view/feed_page.dart';
 import 'package:nodelabs_case_study/home/view/home_screen.dart';
 import 'package:nodelabs_case_study/initialize/view/initialize_screen.dart';
+import 'package:nodelabs_case_study/limited_offer/view/limited_offer.dart';
 import 'package:nodelabs_case_study/profile/view/profile_page.dart';
 import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
@@ -195,4 +196,26 @@ class UpdatePhotoRouteData extends GoRouteData with _$UpdatePhotoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const UpdatePhotoPage();
+}
+
+@TypedGoRoute<LimitedOfferPageRouteData>(
+  name: 'limited-offer',
+  path: '/limited-offer',
+)
+class LimitedOfferPageRouteData extends GoRouteData
+    with _$LimitedOfferPageRouteData {
+  const LimitedOfferPageRouteData();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage<void>(
+      key: state.pageKey,
+      opaque: false,
+      barrierDismissible: true,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return child;
+      },
+      child: const LimitedOffer(),
+    );
+  }
 }
