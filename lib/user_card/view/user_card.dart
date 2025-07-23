@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nodelabs_case_study/app_router/routes.dart';
 import 'package:nodelabs_case_study/i18n/strings.g.dart';
 import 'package:nodelabs_case_study/user_card/bloc/user_card_bloc.dart';
 import 'package:nodelabs_ui/nodelabs_ui.dart';
@@ -86,7 +87,9 @@ class _UserCardContent extends StatelessWidget {
             const SizedBox(width: 10),
             // Add Photo Button
             NodelabsFilledButton(
-              onTap: () {},
+              onTap: () {
+                const UpdatePhotoRouteData().push<void>(context);
+              },
               title: context.t.addPhoto,
             ),
           ],

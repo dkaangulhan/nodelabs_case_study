@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:api_client/api_client.dart';
 import 'package:api_client/src/models/api_favorite_movie_response.dart';
@@ -85,6 +86,38 @@ class ApiClient {
     }
   }
 
+  /// Upload photo
+  Future<String> uploadPhoto({required File file}) async {
+    try {
+      final headers = await _prepareHeaders({});
+      final formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(
+          file.path,
+          filename: 'photo.jpg',
+        ),
+      });
+      final response = await _dio.post<ApiResponse>(
+        ApiEndPoints.uploadPhoto,
+        options: Options(
+          headers: headers,
+          contentType: 'multipart/form-data',
+        ),
+        data: formData,
+      );
+      return (response.data!.data! as Map<String, dynamic>)['photoUrl']
+          as String;
+    } on DioException catch (e) {
+      final error = e.error;
+      if (error is ApiResponseException) {
+        throw error;
+      }
+      if (e.response?.statusCode == 413) {
+        throw EntityTooLargeException();
+      }
+      rethrow;
+    }
+  }
+
   /// List movies.
   Future<ApiMovieListResponse> listMovies({
     int page = 1,
@@ -151,7 +184,7 @@ class ApiClient {
     } on DioException catch (e) {
       final error = e.error;
       if (error is ApiResponseException) {
-        throw error;
+        throw EntityTooLargeException();
       }
       rethrow;
     }
@@ -164,10 +197,14 @@ class _ApiDioInterceptor implements Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) {
-    final apiResponseError = ApiResponseException.fromJson(
-      err.response!.data as Map<String, dynamic>,
-    );
-    throw apiResponseError;
+    try {
+      final apiResponseError = ApiResponseException.fromJson(
+        err.response!.data as Map<String, dynamic>,
+      );
+      throw apiResponseError;
+    } catch (e) {
+      throw err;
+    }
   }
 
   @override

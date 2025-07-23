@@ -12,7 +12,15 @@ class UserCardBloc extends Bloc<UserCardEvent, UserCardState> {
   })  : _userRepository = userRepository,
         super(UserNotLoaded()) {
     on<LoadUser>(_onLoadUser);
+    on<UserUpdated>(_onUserUpdated);
+    _userUpdateSubscription = _userRepository.userUpdateStream.listen(
+      _onUserRepositoryUpdated,
+    );
   }
+
+  final UserRepository _userRepository;
+
+  late final StreamSubscription<UserUpdateEvent> _userUpdateSubscription;
 
   FutureOr<void> _onLoadUser(
     LoadUser event,
@@ -25,5 +33,20 @@ class UserCardBloc extends Bloc<UserCardEvent, UserCardState> {
     emit(UserNotLoaded());
   }
 
-  final UserRepository _userRepository;
+  FutureOr<void> _onUserUpdated(
+    UserUpdated event,
+    Emitter<UserCardState> emit,
+  ) {
+    emit(UserLoaded(user: _userRepository.user!));
+  }
+
+  void _onUserRepositoryUpdated(UserUpdateEvent event) {
+    add(UserUpdated());
+  }
+
+  @override
+  Future<void> close() async {
+    await _userUpdateSubscription.cancel();
+    return super.close();
+  }
 }

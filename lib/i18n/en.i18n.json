@@ -20,11 +20,15 @@
   "profile": "Profile",
   "addPhoto": "Add Photo",
   "favoriteMovies": "Favorite Movies",
+  "loadPhotos": "Load photos",
+  "loadPhotosDescription": "Resources out incentivize relaxation floor loss cc.",
+  "continue": "Continue",
   "errors": {
     "unknown": "Unknown error",
     "invalidCredentials": "Invalid credentials",
     "userExists": "User exists",
-    "imageCouldntload": "Image couldn't loaded"
+    "imageCouldntload": "Image couldn't loaded",
+    "entityTooLarge": "File size is too large"
   },
   "validators": {
     "email": {

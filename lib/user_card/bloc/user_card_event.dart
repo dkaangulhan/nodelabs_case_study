@@ -8,3 +8,5 @@ sealed class UserCardEvent extends Equatable {
 }
 
 class LoadUser extends UserCardEvent {}
+
+class UserUpdated extends UserCardEvent {}

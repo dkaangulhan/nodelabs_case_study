@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _AnimatedBranchContainer extends StatelessWidget {
+class _AnimatedBranchContainer extends StatefulWidget {
   const _AnimatedBranchContainer({
     required this.currentIndex,
     required this.children,
@@ -35,30 +35,41 @@ class _AnimatedBranchContainer extends StatelessWidget {
   final List<Widget> children;
 
   @override
+  State<_AnimatedBranchContainer> createState() =>
+      _AnimatedBranchContainerState();
+}
+
+class _AnimatedBranchContainerState extends State<_AnimatedBranchContainer> {
+  bool _shouldHideBottomNavbar() {
+    return GoRouter.of(context).state.fullPath ==
+        const UpdatePhotoRouteData().location;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Positioned.fill(
             child: Stack(
-              children: children.mapIndexed(
+              children: widget.children.mapIndexed(
                 (int index, Widget navigator) {
                   return AnimatedSlide(
                     duration: const Duration(milliseconds: 600),
-                    curve: index == currentIndex
+                    curve: index == widget.currentIndex
                         ? Curves.easeOut
                         : Curves.easeInOut,
                     offset: Offset(
-                      index == currentIndex ? 0 : 0.25,
+                      index == widget.currentIndex ? 0 : 0.25,
                       0,
                     ),
                     child: AnimatedOpacity(
-                      opacity: index == currentIndex ? 1 : 0,
+                      opacity: index == widget.currentIndex ? 1 : 0,
                       duration: const Duration(milliseconds: 300),
                       child: IgnorePointer(
-                        ignoring: index != currentIndex,
+                        ignoring: index != widget.currentIndex,
                         child: TickerMode(
-                          enabled: index == currentIndex,
+                          enabled: index == widget.currentIndex,
                           child: navigator,
                         ),
                       ),
@@ -69,10 +80,13 @@ class _AnimatedBranchContainer extends StatelessWidget {
             ),
           ),
           // Bottom nav bar
-          Positioned(
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
             left: 16,
             right: 16,
-            bottom: NodelabsCaseStudyTheme.homeScreenPadding(context).bottom,
+            bottom: _shouldHideBottomNavbar()
+                ? -NodelabsCaseStudyTheme.homeScreenBottomNavbarHeight
+                : NodelabsCaseStudyTheme.homeScreenPadding(context).bottom,
             child: SizedBox(
               height: NodelabsCaseStudyTheme.homeScreenBottomNavbarHeight,
               child: Row(

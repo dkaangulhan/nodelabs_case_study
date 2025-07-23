@@ -136,6 +136,13 @@ RouteBase get $homeScreenRouteData => StatefulShellRouteData.$route(
               path: '/profile',
               name: 'profile',
               factory: _$ProfilePageRouteData._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'update-photo',
+                  name: 'update-photo',
+                  factory: _$UpdatePhotoRouteData._fromState,
+                ),
+              ],
             ),
           ],
         ),
@@ -177,6 +184,29 @@ mixin _$ProfilePageRouteData on GoRouteData {
   @override
   String get location => GoRouteData.$location(
         '/profile',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$UpdatePhotoRouteData on GoRouteData {
+  static UpdatePhotoRouteData _fromState(GoRouterState state) =>
+      const UpdatePhotoRouteData();
+
+  @override
+  String get location => GoRouteData.$location(
+        '/profile/update-photo',
       );
 
   @override

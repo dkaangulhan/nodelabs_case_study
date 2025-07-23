@@ -10,6 +10,7 @@ import 'package:nodelabs_case_study/initialize/view/initialize_screen.dart';
 import 'package:nodelabs_case_study/profile/view/profile_page.dart';
 import 'package:nodelabs_case_study/register/view/register_page.dart';
 import 'package:nodelabs_case_study/sign_in/view/sign_in_page.dart';
+import 'package:nodelabs_case_study/update_photo/view/update_photo_page.dart';
 
 part 'routes.g.dart';
 
@@ -117,6 +118,12 @@ class RegisterPageRouteData extends GoRouteData with _$RegisterPageRouteData {
         TypedGoRoute<ProfilePageRouteData>(
           name: 'profile',
           path: '/profile',
+          routes: [
+            TypedGoRoute<UpdatePhotoRouteData>(
+              name: 'update-photo',
+              path: 'update-photo',
+            ),
+          ],
         ),
       ],
     ),
@@ -179,4 +186,13 @@ class ProfilePageRouteData extends GoRouteData with _$ProfilePageRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const ProfilePage();
+}
+
+@immutable
+class UpdatePhotoRouteData extends GoRouteData with _$UpdatePhotoRouteData {
+  const UpdatePhotoRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const UpdatePhotoPage();
 }

@@ -1,5 +1,6 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:cache_repository/cache_repository.dart';
+import 'package:external_media_repository/external_media_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_repository/movie_repository.dart';
@@ -14,18 +15,21 @@ class App extends StatelessWidget {
     required CacheRepository cacheRepository,
     required MovieRepository movieRepository,
     required UserRepository userRepository,
+    required ExternalMediaRepository externalMediaRepository,
     required AppRouter appRouter,
     super.key,
   })  : _authRepository = authRepository,
         _cacheRepository = cacheRepository,
         _movieRepository = movieRepository,
         _userRepository = userRepository,
+        _externalMediaRepository = externalMediaRepository,
         _appRouter = appRouter;
 
   final AuthRepository _authRepository;
   final CacheRepository _cacheRepository;
   final MovieRepository _movieRepository;
   final UserRepository _userRepository;
+  final ExternalMediaRepository _externalMediaRepository;
   final AppRouter _appRouter;
 
   @override
@@ -43,6 +47,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider.value(
           value: _userRepository,
+        ),
+        RepositoryProvider.value(
+          value: _externalMediaRepository,
         ),
       ],
       child: TranslationProvider(

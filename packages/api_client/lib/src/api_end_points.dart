@@ -7,6 +7,7 @@ abstract class ApiEndPoints {
   /// user
   static const String login = '$_baseUrl/user/login';
   static const String register = '$_baseUrl/user/register';
+  static const String uploadPhoto = '$_baseUrl/user/upload_photo';
 
   /// movies
   static const String list = '$_baseUrl/movie/list';

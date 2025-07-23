@@ -70,6 +70,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get profile => 'Profile';
 	String get addPhoto => 'Add Photo';
 	String get favoriteMovies => 'Favorite Movies';
+	String get loadPhotos => 'Load photos';
+	String get loadPhotosDescription => 'Resources out incentivize relaxation floor loss cc.';
+	String get kContinue => 'Continue';
 	late final TranslationsErrorsEn errors = TranslationsErrorsEn._(_root);
 	late final TranslationsValidatorsEn validators = TranslationsValidatorsEn._(_root);
 }
@@ -85,6 +88,7 @@ class TranslationsErrorsEn {
 	String get invalidCredentials => 'Invalid credentials';
 	String get userExists => 'User exists';
 	String get imageCouldntload => 'Image couldn\'t loaded';
+	String get entityTooLarge => 'File size is too large';
 }
 
 // Path: validators
@@ -170,10 +174,14 @@ extension on Translations {
 			case 'profile': return 'Profile';
 			case 'addPhoto': return 'Add Photo';
 			case 'favoriteMovies': return 'Favorite Movies';
+			case 'loadPhotos': return 'Load photos';
+			case 'loadPhotosDescription': return 'Resources out incentivize relaxation floor loss cc.';
+			case 'kContinue': return 'Continue';
 			case 'errors.unknown': return 'Unknown error';
 			case 'errors.invalidCredentials': return 'Invalid credentials';
 			case 'errors.userExists': return 'User exists';
 			case 'errors.imageCouldntload': return 'Image couldn\'t loaded';
+			case 'errors.entityTooLarge': return 'File size is too large';
 			case 'validators.email.empty': return 'Please enter your email';
 			case 'validators.email.notValid': return 'Please enter a valid email address';
 			case 'validators.password.empty': return 'Please enter your password';
